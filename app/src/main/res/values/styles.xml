@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/grey</item>
+    </style>
+
+    <style name="StyleTitle14" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/another_white</item>
+    </style>
+
+    <style name="StyleNavButton" parent="Widget.Material3.Button">
+        <item name="android:textAppearance">@style/StyleTitle14</item>
+        <item name="android:paddingVertical">0dp</item>
+        <item name="android:paddingHorizontal">15dp</item>
+        <item name="cornerRadius">5dp</item>
+    </style>
+</resources>

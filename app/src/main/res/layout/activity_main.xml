@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/favorites"
-            app:icon="@drawable/ic_heart_empty"
+            app:icon="@drawable/ic_heart"
             app:iconGravity="end"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

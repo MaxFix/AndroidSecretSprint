@@ -9,22 +9,22 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="328dp"
         android:layout_height="36dp"
-        android:layout_marginBottom="58dp"
+        android:layout_width="328dp"
+        android:layout_marginBottom="@dimen/half_of_main_padding"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             style="@style/StyleNavButton"
             android:id="@+id/categories"
-            android:backgroundTint="@color/violet"
-            android:layout_width="162dp"
-            android:layout_height="wrap_content"
+            android:backgroundTint="@color/categories_violet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/categories" />
+            android:text="@string/title_categories" />
 
         <View
             android:layout_width="4dp"
@@ -33,12 +33,13 @@
         <Button
             style="@style/StyleNavButton"
             android:id="@+id/favorites"
-            android:backgroundTint="@color/red"
-            android:layout_width="162dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/favorites"
+            android:backgroundTint="@color/red"
+            android:text="@string/title_favorites"
             app:icon="@drawable/ic_heart"
-            app:iconGravity="end"/>
+            app:iconGravity="end"
+            app:iconSize="24dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

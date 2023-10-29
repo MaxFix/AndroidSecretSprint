@@ -9,30 +9,31 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:layout_width="328dp"
+        android:layout_marginStart="@dimen/main_padding"
+        android:layout_marginEnd="@dimen/main_padding"
         android:layout_marginBottom="@dimen/half_of_main_padding"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        >
 
         <Button
-            style="@style/StyleNavButton"
             android:id="@+id/categories"
-            android:backgroundTint="@color/categories_violet"
+            style="@style/StyleNavButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/categories_violet"
             android:text="@string/title_categories" />
 
         <View
             android:layout_width="4dp"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp" />
 
         <Button
-            style="@style/StyleNavButton"
             android:id="@+id/favorites"
+            style="@style/StyleNavButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_padding"
         android:layout_marginEnd="@dimen/main_padding"
         android:layout_marginBottom="@dimen/half_of_main_padding"

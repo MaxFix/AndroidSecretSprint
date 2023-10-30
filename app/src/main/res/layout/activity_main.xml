@@ -22,7 +22,7 @@
             android:id="@+id/categories"
             style="@style/StyleNavButton"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/categories_violet"
             android:text="@string/title_categories" />
@@ -35,7 +35,7 @@
             android:id="@+id/favorites"
             style="@style/StyleNavButton"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/red"
             android:text="@string/title_favorites"

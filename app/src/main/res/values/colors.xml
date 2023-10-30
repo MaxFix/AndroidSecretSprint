@@ -2,6 +2,6 @@
 <resources>
     <color name="text_btn_color">#FFFFFF</color>
     <color name="main_activity_background_color">#F4FAFF</color>
-    <color name="text_btn_categories_color">#525DC0</color>
+    <color name="background_btn_categories_color">#525DC0</color>
     <color name="background_btn_favorites_color">#E13E3E</color>
 </resources>

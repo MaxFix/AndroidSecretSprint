@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/grey</item>
-    </style>
 
     <style name="StyleTitle14" parent="TextAppearance.AppCompat">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@color/title_btn_white</item>
+        <item name="android:textColor">@color/text_btn_white_color</item>
     </style>
 
     <style name="StyleNavButton" parent="Widget.Material3.Button">

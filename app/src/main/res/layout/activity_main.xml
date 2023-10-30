@@ -4,27 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/main_activity_background_grey"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/btnLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_padding"
         android:layout_marginEnd="@dimen/main_padding"
-        android:layout_marginBottom="@dimen/half_of_main_padding"
+        android:layout_marginBottom="@dimen/main_padding_half"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/categories"
+            android:id="@+id/btnCategories"
             style="@style/StyleNavButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/categories_violet"
+            android:backgroundTint="@color/text_btn_categories_violet"
             android:text="@string/title_categories" />
 
         <View
@@ -32,15 +31,15 @@
             android:layout_height="0dp" />
 
         <Button
-            android:id="@+id/favorites"
+            android:id="@+id/btnFavorites"
             style="@style/StyleNavButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="@color/background_btn_favorites_red"
+            android:drawablePadding="10dp"
             android:text="@string/title_favorites"
             app:icon="@drawable/ic_heart"
-            android:drawablePadding="10dp"
             app:iconGravity="textEnd"
             app:iconSize="24dp" />
     </LinearLayout>

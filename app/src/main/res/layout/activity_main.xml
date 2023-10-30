@@ -40,7 +40,8 @@
             android:backgroundTint="@color/red"
             android:text="@string/title_favorites"
             app:icon="@drawable/ic_heart"
-            app:iconGravity="end"
+            android:drawablePadding="10dp"
+            app:iconGravity="textEnd"
             app:iconSize="24dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

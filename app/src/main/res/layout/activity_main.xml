@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_activity_background_grey"
+    android:background="@color/main_activity_background_color"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/btnLinearLayout"
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_padding"
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/text_btn_categories_violet"
+            android:backgroundTint="@color/text_btn_categories_color"
             android:text="@string/title_categories" />
 
         <View
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/background_btn_favorites_red"
+            android:backgroundTint="@color/background_btn_favorites_color"
             android:drawablePadding="10dp"
             android:text="@string/title_favorites"
             app:icon="@drawable/ic_heart"

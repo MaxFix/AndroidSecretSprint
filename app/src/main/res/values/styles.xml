@@ -5,7 +5,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@color/text_btn_white_color</item>
+        <item name="android:textColor">@color/text_btn_color</item>
     </style>
 
     <style name="StyleNavButton" parent="Widget.Material3.Button">

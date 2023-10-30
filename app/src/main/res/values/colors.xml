@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="text_btn_white_color">#FFFFFF</color>
-    <color name="main_activity_background_grey">#F4FAFF</color>
-    <color name="text_btn_categories_violet">#525DC0</color>
-    <color name="background_btn_favorites_red">#E13E3E</color>
+    <color name="text_btn_color">#FFFFFF</color>
+    <color name="main_activity_background_color">#F4FAFF</color>
+    <color name="text_btn_categories_color">#525DC0</color>
+    <color name="background_btn_favorites_color">#E13E3E</color>
 </resources>

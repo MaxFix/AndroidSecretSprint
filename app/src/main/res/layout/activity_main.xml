@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/text_btn_categories_color"
+            android:backgroundTint="@color/background_btn_categories_color"
             android:text="@string/title_categories" />
 
         <View
@@ -43,4 +43,18 @@
             app:iconGravity="textEnd"
             app:iconSize="24dp" />
     </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mainContainer"
+        android:name="com.example.androidsecretsprint.CategoriesListFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBtnLL" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

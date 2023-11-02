@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
+import com.example.androidsecretsprint.databinding.FragmentListCategoriesBinding
 
 class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
+    private lateinit var binding: FragmentListCategoriesBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: ViewDataBinding? =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_list_categories, container, false)
-        return binding?.root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentListCategoriesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }

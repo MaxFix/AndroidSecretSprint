@@ -3,6 +3,7 @@ package com.example.androidsecretsprint
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import com.example.androidsecretsprint.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,19 +15,19 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val categoriesBtn: Button = findViewById(R.id.btnCategories)
-        val favoritesBtn: Button = findViewById(R.id.btnFavorites)
+        val categoriesBtn: Button = binding.btnCategories
+        val favoritesBtn: Button = binding.btnFavorites
 
         categoriesBtn.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.mainContainer, CategoriesListFragment())
-                .commit()
+            supportFragmentManager.commit {
+                replace(R.id.mainContainer, CategoriesListFragment())
+            }
         }
 
         favoritesBtn.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.mainContainer, FavoritesFragment())
-                .commit()
+            supportFragmentManager.commit {
+                replace(R.id.mainContainer, FavoritesFragment())
+            }
         }
     }
 }

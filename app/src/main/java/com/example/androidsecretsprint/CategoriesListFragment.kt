@@ -38,8 +38,10 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
         for (i in 0 until jsonArray.length()) {
             val item: JSONObject = jsonArray.getJSONObject(i)
             val imageUrl = item.getString("imageUrl").substringAfterLast("/")
-            val category = Category(item.getInt("id"), item.getString("title"),
-                item.getString("description"), item.getString(imageUrl))
+            val category = Category(
+                item.getInt("id"), item.getString("title"),
+                item.getString("description"), item.getString(imageUrl)
+            )
             categories.add(category)
         }
 

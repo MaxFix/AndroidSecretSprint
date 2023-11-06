@@ -1,9 +1,9 @@
 package com.example.androidsecretsprint
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import com.example.androidsecretsprint.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,12 +15,19 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val fragment = CategoriesListFragment()
-        val fragmentManager : FragmentManager = supportFragmentManager
-        val mainFragment : FragmentTransaction = fragmentManager.beginTransaction()
+        val categoriesBtn: Button = binding.btnCategories
+        val favoritesBtn: Button = binding.btnFavorites
 
-        mainFragment.replace(R.id.mainContainer, fragment)
-        mainFragment.addToBackStack(null)
-        mainFragment.commit()
+        categoriesBtn.setOnClickListener {
+            supportFragmentManager.commit {
+                replace(R.id.mainContainer, CategoriesListFragment())
+            }
+        }
+
+        favoritesBtn.setOnClickListener {
+            supportFragmentManager.commit {
+                replace(R.id.mainContainer, FavoritesFragment())
+            }
+        }
     }
 }

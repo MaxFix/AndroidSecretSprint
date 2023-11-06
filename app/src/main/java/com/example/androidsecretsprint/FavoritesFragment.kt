@@ -15,9 +15,8 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val textView = binding.tvFavoritesText
         textView.text
     }

@@ -49,6 +49,4 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     }
 
     val categories = createCategoryList(assets, "category.json")
-
-
 }

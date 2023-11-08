@@ -2,4 +2,5 @@
     <string name="app_name">Android Secret Sprint</string>
     <string name="title_categories">категории</string>
     <string name="title_favorites">избранное</string>
+    <string name="burger">burger</string>
 </resources>

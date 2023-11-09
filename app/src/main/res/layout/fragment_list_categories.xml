@@ -27,10 +27,10 @@
             style="@style/StyleHeaderButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="@dimen/main_padding"
+            android:layout_marginBottom="@dimen/main_padding"
             android:background="@drawable/shape_header_rounded_corners"
-            android:text="КАТЕГОРИИ"
+            android:text="@string/title_categories"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

@@ -9,7 +9,7 @@
     android:background="@drawable/shape_header_rounded_corners"
     android:backgroundTint="@color/text_btn_color"
     android:clickable="true"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="@dimen/main_padding_half">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,8 +32,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/main_padding_half"
+            android:layout_marginTop="@dimen/main_padding_half"
             android:layout_marginEnd="75dp"
             android:fontFamily="@font/montserrat_alternates_medium"
             android:text="БУРГЕРЫ"

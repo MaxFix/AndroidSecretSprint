@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
     android:layout_marginHorizontal="@dimen/main_padding_half"
     android:layout_marginBottom="@dimen/main_padding"
-    app:cardCornerRadius="8dp"
-    android:clickable="true"
     android:background="@drawable/shape_header_rounded_corners"
     android:backgroundTint="@color/text_btn_color"
-    android:layout_centerVertical="true">
+    android:clickable="true"
+    app:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="@drawable/shape_header_rounded_corners"
-        android:contentDescription="@string/burger"
-        android:src="@drawable/burger"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="75dp"
-        android:fontFamily="@font/montserrat_alternates_medium"
-        android:text="БУРГЕРЫ"
-        android:textColor="@color/background_btn_categories_color"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/shape_header_rounded_corners"
+            android:contentDescription="@string/burger"
+            android:src="@drawable/burger"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="140dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="@dimen/main_padding_half"
-        android:layout_marginTop="@dimen/main_padding_half"
-        android:layout_marginBottom="@dimen/main_padding_half"
-        android:layout_marginEnd="@dimen/main_padding_half"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="Рецепты всех
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="75dp"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:text="БУРГЕРЫ"
+            android:textColor="@color/background_btn_categories_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="140dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="@dimen/main_padding_half"
+            android:layout_marginTop="@dimen/main_padding_half"
+            android:layout_marginEnd="@dimen/main_padding_half"
+            android:layout_marginBottom="@dimen/main_padding_half"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Рецепты всех
         популярных видов бургеров"
-        android:textColor="#666666"
-        android:textSize="12sp" />
+            android:textColor="#666666"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

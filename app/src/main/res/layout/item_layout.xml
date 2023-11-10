@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_centerVertical="true"
     android:layout_marginHorizontal="@dimen/main_padding_half"
     android:layout_marginBottom="@dimen/main_padding"
@@ -20,7 +21,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:background="@drawable/shape_header_rounded_corners"
             android:contentDescription="@string/burger"
             android:src="@drawable/burger"
@@ -30,30 +31,24 @@
 
         <TextView
             android:id="@+id/textView"
+            style="@style/StyleTitleCategories14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/main_padding_half"
             android:layout_marginTop="@dimen/main_padding_half"
             android:layout_marginEnd="75dp"
-            android:fontFamily="@font/montserrat_alternates_medium"
-            android:text="БУРГЕРЫ"
-            android:textColor="@color/background_btn_categories_color"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:text="@string/title_burgers_category_text" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="140dp"
-            android:layout_height="54dp"
+            style="@style/StyleDescriptionCategories12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/main_padding_half"
             android:layout_marginTop="@dimen/main_padding_half"
             android:layout_marginEnd="@dimen/main_padding_half"
             android:layout_marginBottom="@dimen/main_padding_half"
-            android:fontFamily="@font/montserrat_regular"
-            android:text="Рецепты всех
-        популярных видов бургеров"
-            android:textColor="#666666"
-            android:textSize="12sp" />
+            android:text="@string/description_burgers_category_text" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

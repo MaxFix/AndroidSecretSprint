@@ -1,10 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.AndroidSecretSprint" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/main_activity_background_color</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>
 
-    <style name="Theme.AndroidSecretSprint" parent="Base.Theme.AndroidSecretSprint"/>
+    <style name="Theme.AndroidSecretSprint" parent="Base.Theme.AndroidSecretSprint" />
 </resources>

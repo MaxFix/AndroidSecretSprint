@@ -53,4 +53,15 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
         binding = FragmentListCategoriesBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecycler()
+    }
+
+    fun initRecycler() {
+        val categoriesListAdapter = CategoriesListAdapter(categories, context = CategoriesListFragment())
+        val recyclerView = binding.rvCategories
+        recyclerView.adapter = categoriesListAdapter
+    }
 }

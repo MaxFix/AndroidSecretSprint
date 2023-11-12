@@ -29,11 +29,10 @@ class CategoriesListAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val categoryItem = viewHolder.cvCategoryItem
         val categoryTitle = viewHolder.tvCategoryName
         val categoryDescription = viewHolder.tvCategoryDescription
         val assetManager = context.requireContext().assets
-        categoryTitle.text = dataSet[position].toString()
+        categoryTitle.text = dataSet[position].title
         categoryDescription.text = dataSet[position].description
 
         try {

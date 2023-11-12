@@ -18,6 +18,7 @@ class CategoriesListAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cvCategoryItem: CardView = view.findViewById(R.id.cvCategoryItem)
         val tvCategoryName: TextView = view.findViewById(R.id.tvCategoryName)
+        val tvCategoryDescription: TextView = view.findViewById(R.id.tvCategoryDescription)
         val ivCategoryImage: ImageView = view.findViewById(R.id.ivCategoryImage)
     }
 
@@ -28,14 +29,20 @@ class CategoriesListAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val categotyTitle = viewHolder.tvCategoryName
+        val categoryItem = viewHolder.cvCategoryItem
+        val categoryTitle = viewHolder.tvCategoryName
+        val categoryDescription = viewHolder.tvCategoryDescription
         val assetManager = context.requireContext().assets
-        categotyTitle.text = dataSet[position].toString()
+        categoryTitle.text = dataSet[position].toString()
+        categoryDescription.text = dataSet[position].description
 
         try {
             val inputStream = assetManager.open(dataSet[position].imageUrl)
             val drawable = Drawable.createFromStream(inputStream, null)
             viewHolder.ivCategoryImage.setImageDrawable(drawable)
+            viewHolder.tvCategoryName.text = categoryTitle.text
+            viewHolder.tvCategoryDescription.text = categoryDescription.text
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

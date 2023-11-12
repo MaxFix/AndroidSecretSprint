@@ -60,7 +60,7 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     }
 
     fun initRecycler() {
-        val categoriesListAdapter = CategoriesListAdapter(categories, context = CategoriesListFragment())
+        val categoriesListAdapter = CategoriesListAdapter(categories, context = this)
         val recyclerView = binding.rvCategories
         recyclerView.adapter = categoriesListAdapter
     }

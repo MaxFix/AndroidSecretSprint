@@ -1,6 +1,7 @@
 package com.example.androidsecretsprint
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import java.io.InputStream
 
 
 class CategoriesListAdapter(
     private val dataSet: List<Category>,
-    val context: CategoriesListFragment,
+    private val context: CategoriesListFragment,
 ) :
     RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -31,18 +33,21 @@ class CategoriesListAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val categoryTitle = viewHolder.tvCategoryName
         val categoryDescription = viewHolder.tvCategoryDescription
-        val assetManager = context.requireContext().assets
+        val fragment = context
+        val inputStream: InputStream? = fragment.context?.assets?.open(dataSet[position].imageUrl)
+        val drawable = Drawable.createFromStream(inputStream, null)
+
         categoryTitle.text = dataSet[position].title
         categoryDescription.text = dataSet[position].description
 
         try {
-            val inputStream = assetManager.open(dataSet[position].imageUrl)
-            val drawable = Drawable.createFromStream(inputStream, null)
+
             viewHolder.ivCategoryImage.setImageDrawable(drawable)
             viewHolder.tvCategoryName.text = categoryTitle.text
             viewHolder.tvCategoryDescription.text = categoryDescription.text
 
         } catch (e: Exception) {
+            Log.e("onBindViewHolder", "Произошла ошибка", e)
             e.printStackTrace()
         }
     }

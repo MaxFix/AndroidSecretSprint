@@ -34,7 +34,7 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
         <item name="android:textColor">@color/title_categories_color</item>
-        <item name="backgroundTint">@color/text_btn_color</item>
+        <item name="backgroundTint">@color/main_activity_background_color</item>
         <item name="android:paddingHorizontal">10dp</item>
         <item name="android:paddingVertical">10dp</item>
         <item name="cornerRadius">8dp</item>

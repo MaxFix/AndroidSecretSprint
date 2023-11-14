@@ -26,7 +26,7 @@ class CategoriesListAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_layout, viewGroup, false)
+            .inflate(R.layout.item_category, viewGroup, false)
         return ViewHolder(view)
     }
 
@@ -47,8 +47,8 @@ class CategoriesListAdapter(
             viewHolder.tvCategoryDescription.text = categoryDescription.text
 
         } catch (e: Exception) {
-            Log.e("onBindViewHolder", "Произошла ошибка", e)
-            e.printStackTrace()
+            Log.e("onBindViewHolder", "Произошла ошибка доступа к assets",
+                Throwable(Log.getStackTraceString(e)))
         }
     }
 

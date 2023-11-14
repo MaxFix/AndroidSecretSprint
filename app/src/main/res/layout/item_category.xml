@@ -48,6 +48,7 @@
             android:layout_marginStart="@dimen/main_padding_half"
             android:layout_marginTop="@dimen/main_padding_half"
             android:layout_marginEnd="@dimen/main_padding_half"
+            android:layout_marginBottom="@dimen/main_padding_half"
 
             android:text="@string/description_burgers_category_text" />
     </LinearLayout>

@@ -17,6 +17,16 @@ class CategoriesListAdapter(
     private val context: CategoriesListFragment,
 ) :
     RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>() {
+    private val itemClickListener: OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onItemClick()
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) { // callback
+        val itemClickListener = listener
+    }
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cvCategoryItem: CardView = view.findViewById(R.id.cvCategoryItem)
         val tvCategoryName: TextView = view.findViewById(R.id.tvCategoryName)
@@ -47,8 +57,14 @@ class CategoriesListAdapter(
             viewHolder.tvCategoryDescription.text = categoryDescription.text
 
         } catch (e: Exception) {
-            Log.e("onBindViewHolder", "Произошла ошибка доступа к assets",
-                Throwable(Log.getStackTraceString(e)))
+            Log.e(
+                "onBindViewHolder", "Произошла ошибка доступа к assets",
+                Throwable(Log.getStackTraceString(e))
+            )
+        }
+
+        viewHolder.cvCategoryItem.setOnClickListener { //вызов callback'a
+            itemClickListener?.onItemClick()
         }
     }
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.example.androidsecretsprint.databinding.FragmentListCategoriesBinding
 
 class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
@@ -64,17 +63,5 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
         val categoriesListAdapter = CategoriesListAdapter(categories, context = this)
         val recyclerView = binding.rvCategories
         recyclerView.adapter = categoriesListAdapter
-
-        categoriesListAdapter.setOnItemClickListener(object : CategoriesListAdapter.OnItemClickListener {
-            override fun onItemClick() {
-                openRecipesByCategoryId()
-            }
-        })
-    }
-
-    fun openRecipesByCategoryId() {
-        val fragment = RecipesListFragment()
-        val transaction: FragmentTransaction? = fragmentManager?.beginTransaction()
-        transaction?.replace(R.id.categories_list, fragment)?.addToBackStack(null)?.commit()
     }
 }

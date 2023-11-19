@@ -77,7 +77,8 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     fun openRecipesByCategoryId() {
         childFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<CategoriesListFragment>(R.id.tvCategoriesList)
+            replace<RecipesListFragment>(R.id.tvCategoriesList)
+            addToBackStack(null)
         }
     }
 }

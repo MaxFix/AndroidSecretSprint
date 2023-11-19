@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.androidsecretsprint.databinding.FragmentListCategoriesBinding
+
 
 class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     private lateinit var binding: FragmentListCategoriesBinding
@@ -73,8 +75,9 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     }
 
     fun openRecipesByCategoryId() {
-        val fragment = RecipesListFragment()
-        val transaction: FragmentTransaction? = fragmentManager?.beginTransaction()
-        transaction?.replace(R.id.categories_list, fragment)?.addToBackStack(null)?.commit()
+        childFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<CategoriesListFragment>(R.id.tvCategoriesList)
+        }
     }
 }

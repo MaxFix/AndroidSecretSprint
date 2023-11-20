@@ -17,14 +17,14 @@ class CategoriesListAdapter(
     private val context: CategoriesListFragment,
 ) :
     RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>() {
-    private val itemClickListener: OnItemClickListener? = null
+    private var itemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
         fun onItemClick()
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) { // callback
-        val itemClickListener = listener
+        itemClickListener = listener
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

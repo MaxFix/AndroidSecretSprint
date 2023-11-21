@@ -66,7 +66,6 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
         val categoriesListAdapter = CategoriesListAdapter(categories, context = this)
         val recyclerView = binding.rvCategories
         recyclerView.adapter = categoriesListAdapter
-
         categoriesListAdapter.setOnItemClickListener(object : CategoriesListAdapter.OnItemClickListener {
             override fun onItemClick() {
                 openRecipesByCategoryId()

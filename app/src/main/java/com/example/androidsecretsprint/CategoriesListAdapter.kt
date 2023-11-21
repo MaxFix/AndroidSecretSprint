@@ -17,6 +17,16 @@ class CategoriesListAdapter(
     private val context: CategoriesListFragment,
 ) :
     RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>() {
+    private var itemClickListener: OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onItemClick()
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) { // callback
+        itemClickListener = listener
+    }
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cvCategoryItem: CardView = view.findViewById(R.id.cvCategoryItem)
         val tvCategoryName: TextView = view.findViewById(R.id.tvCategoryName)
@@ -31,24 +41,28 @@ class CategoriesListAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val categoryTitle = viewHolder.tvCategoryName
-        val categoryDescription = viewHolder.tvCategoryDescription
-        val fragment = context
-        val inputStream: InputStream? = fragment.context?.assets?.open(dataSet[position].imageUrl)
-        val drawable = Drawable.createFromStream(inputStream, null)
 
-        categoryTitle.text = dataSet[position].title
-        categoryDescription.text = dataSet[position].description
+        val fragment = context
 
         try {
+            val categoryTitle = viewHolder.tvCategoryName
+            val categoryDescription = viewHolder.tvCategoryDescription
+            val inputStream: InputStream? = fragment.context?.assets?.open(dataSet[position].imageUrl)
+            val drawable = Drawable.createFromStream(inputStream, null)
 
-            viewHolder.ivCategoryImage.setImageDrawable(drawable)
             viewHolder.tvCategoryName.text = categoryTitle.text
             viewHolder.tvCategoryDescription.text = categoryDescription.text
-
+            viewHolder.ivCategoryImage.setImageDrawable(drawable)
+            categoryTitle.text = dataSet[position].title
+            categoryDescription.text = dataSet[position].description
         } catch (e: Exception) {
-            Log.e("onBindViewHolder", "Произошла ошибка доступа к assets",
-                Throwable(Log.getStackTraceString(e)))
+            Log.e(
+                "!!!", "onBindViewHolder : asset error ${e.printStackTrace()}"
+            )
+        }
+
+        viewHolder.cvCategoryItem.setOnClickListener { //вызов callback'a
+            itemClickListener?.onItemClick()
         }
     }
 

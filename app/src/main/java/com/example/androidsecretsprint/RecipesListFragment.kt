@@ -10,7 +10,7 @@ import com.example.androidsecretsprint.databinding.FragmentRecipesListBinding
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     private lateinit var binding: FragmentRecipesListBinding
 
-    var recipeID: Int? = null
+    var recipeID: String? = null
     var recipeTitle: String? = null
     var recipeImageUrl: String? = null
 
@@ -23,8 +23,8 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         super.onViewCreated(view, savedInstanceState)
         val textView = binding.tvCategoriesList
         textView.text
-        recipeID = requireArguments().getInt("CATEGORY_ID")
-        recipeTitle = requireArguments().getString("CATEGORY_NAME")
-        recipeImageUrl = requireArguments().getString("CATEGORY_IMAGE_URL")
+        recipeID = arguments?.let { Constants.ARG_CATEGORY_ID }
+        recipeTitle = arguments?.let { Constants.ARG_CATEGORY_NAME }
+        recipeImageUrl = arguments?.let { Constants.ARG_CATEGORY_IMAGE_URL }
     }
 }

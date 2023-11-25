@@ -20,7 +20,7 @@ class CategoriesListAdapter(
     private var itemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onItemClick(categoryId: Int)
+        fun onItemClick(categoryId: Category)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) { // callback
@@ -62,7 +62,7 @@ class CategoriesListAdapter(
         }
 
         viewHolder.cvCategoryItem.setOnClickListener { //вызов callback'a
-            itemClickListener?.onItemClick(position)
+            itemClickListener?.onItemClick(dataSet[position])
         }
     }
 

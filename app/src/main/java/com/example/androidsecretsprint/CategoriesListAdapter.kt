@@ -62,7 +62,7 @@ class CategoriesListAdapter(
         }
 
         viewHolder.cvCategoryItem.setOnClickListener { //вызов callback'a
-            itemClickListener?.onItemClick(position)
+            itemClickListener?.onItemClick(dataSet[position].id)
         }
     }
 

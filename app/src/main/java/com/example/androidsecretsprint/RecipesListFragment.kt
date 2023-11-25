@@ -10,9 +10,9 @@ import com.example.androidsecretsprint.databinding.FragmentRecipesListBinding
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     private lateinit var binding: FragmentRecipesListBinding
 
-    var recipeID: Int? = null
-    var recipeTitle: String? = null
-    var recipeImageUrl: String? = null
+    private var recipeID: Int? = null
+    private var recipeTitle: String? = null
+    private var recipeImageUrl: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipesListBinding.inflate(inflater, container, false)

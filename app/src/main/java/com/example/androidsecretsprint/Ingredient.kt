@@ -1,7 +1,7 @@
 package com.example.androidsecretsprint
 
 data class Ingredient(
-    val quantity: Float,
-    val unitOfMeasure: Float,
+    val quantity: String,
+    val unitOfMeasure: String,
     val description: String,
 )

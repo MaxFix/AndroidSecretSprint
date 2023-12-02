@@ -1,3 +1,4 @@
+import com.example.androidsecretsprint.Ingredient
 import com.example.androidsecretsprint.Recipe
 
 object STUB_RECIPES {

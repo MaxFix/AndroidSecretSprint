@@ -33,7 +33,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         recipeImageUrl = arguments?.let { Constants.ARG_RECIPE_IMAGE_URL }
 
         val fragment = context
-        val inputStream: InputStream? = fragment?.assets?.open("bcg_recipes_list.png")
+        val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }
         val drawable = Drawable.createFromStream(inputStream, null)
         binding.recipesListHeaderImg.setImageDrawable(drawable)
     }

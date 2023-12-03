@@ -39,7 +39,6 @@ class RecipesListAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val fragment = fragment
         val recipeTitle = viewHolder.tvRecipeName
 
         try {

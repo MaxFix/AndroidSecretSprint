@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:background="@drawable/shape_header_rounded_corners"
-            android:contentDescription="@string/title_burgers_recipes_text"
+            android:contentDescription="бургеры"
             android:scaleType="centerCrop"
             android:src="@drawable/burger"
             app:layout_constraintEnd_toEndOf="parent"

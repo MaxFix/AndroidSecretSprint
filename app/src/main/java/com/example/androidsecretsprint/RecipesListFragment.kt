@@ -28,12 +28,12 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
 
-        recipeID = arguments?.let { Constants.ARG_CATEGORY_ID }
-        recipeTitle = arguments?.let { Constants.ARG_CATEGORY_NAME }
-        recipeImageUrl = arguments?.let { Constants.ARG_CATEGORY_IMAGE_URL }
+        recipeID = arguments?.let { Constants.ARG_RECIPE_ID }
+        recipeTitle = arguments?.let { Constants.ARG_RECIPE_NAME }
+        recipeImageUrl = arguments?.let { Constants.ARG_RECIPE_IMAGE_URL }
 
         val fragment = context
-        val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }
+        val inputStream: InputStream? = fragment?.assets?.open("bcg_recipes_list.png")
         val drawable = Drawable.createFromStream(inputStream, null)
         binding.recipesListHeaderImg.setImageDrawable(drawable)
     }
@@ -51,9 +51,6 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     }
 
     fun openRecipeByRecipeId(recipeId: Int) {
-        val recipeName: String = STUB_RECIPES.burgerRecipes[recipeId].title // ???
-        val recipeImageUrl: String = STUB_RECIPES.burgerRecipes[recipeId].imageUrl // ???
-
         parentFragmentManager.commit {
             setReorderingAllowed(true)
             replace<RecipeFragment>(R.id.mainContainer)

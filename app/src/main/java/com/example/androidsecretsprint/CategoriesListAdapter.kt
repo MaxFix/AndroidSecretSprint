@@ -43,10 +43,11 @@ class CategoriesListAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         val fragment = context
+        val categoryTitle = viewHolder.tvCategoryName
+        val categoryDescription = viewHolder.tvCategoryDescription
 
         try {
-            val categoryTitle = viewHolder.tvCategoryName
-            val categoryDescription = viewHolder.tvCategoryDescription
+
             val inputStream: InputStream? = fragment.context?.assets?.open(dataSet[position].imageUrl)
             val drawable = Drawable.createFromStream(inputStream, null)
 

@@ -39,7 +39,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     }
 
     private fun initRecycler() {
-        val recipesListAdapter = RecipesListAdapter(STUB_RECIPES.burgerRecipes, context = this)
+        val recipesListAdapter = RecipesListAdapter(STUB_RECIPES.burgerRecipes, fragment = this)
         val recyclerView = binding.rvRecipes
         recyclerView.adapter = recipesListAdapter
         recipesListAdapter.setOnItemClickListener(object : RecipesListAdapter.OnItemClickListener {

@@ -13,7 +13,7 @@ import java.io.InputStream
 
 class RecipesListAdapter(
     private val dataSet: List<Recipe>,
-    private val context: RecipesListFragment,
+    private val fragment: RecipesListFragment,
 ) :
     RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
     private var itemClickListener: OnItemClickListener? = null
@@ -39,7 +39,7 @@ class RecipesListAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val fragment = context
+        val fragment = fragment
 
         try {
             val recipeTitle = viewHolder.tvRecipeName

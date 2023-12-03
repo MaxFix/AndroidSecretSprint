@@ -21,7 +21,6 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipesListBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -29,14 +28,14 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
 
-        val fragment = context
-        val inputStream: InputStream? = fragment?.assets?.open("burger-hamburger.png")
-        val drawable = Drawable.createFromStream(inputStream, null)
-        binding.recipesListHeaderImg.setImageDrawable(drawable)
-
         recipeID = arguments?.let { Constants.ARG_CATEGORY_ID }
         recipeTitle = arguments?.let { Constants.ARG_CATEGORY_NAME }
         recipeImageUrl = arguments?.let { Constants.ARG_CATEGORY_IMAGE_URL }
+
+        val fragment = context
+        val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }
+        val drawable = Drawable.createFromStream(inputStream, null)
+        binding.recipesListHeaderImg.setImageDrawable(drawable)
     }
 
     private fun initRecycler() {

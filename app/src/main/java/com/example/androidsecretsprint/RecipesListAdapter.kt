@@ -40,12 +40,11 @@ class RecipesListAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val fragment = fragment
+        val recipeTitle = viewHolder.tvRecipeName
 
         try {
-            val recipeTitle = viewHolder.tvRecipeName
             val inputStream: InputStream? = fragment.context?.assets?.open(dataSet[position].imageUrl)
             val drawable = Drawable.createFromStream(inputStream, null)
-
             viewHolder.tvRecipeName.text = recipeTitle.text
             viewHolder.ivRecipeImage.setImageDrawable(drawable)
             recipeTitle.text = dataSet[position].title

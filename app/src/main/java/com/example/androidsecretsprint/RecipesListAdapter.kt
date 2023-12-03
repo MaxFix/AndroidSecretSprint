@@ -45,7 +45,6 @@ class RecipesListAdapter(
         try {
             val inputStream: InputStream? = fragment.context?.assets?.open(dataSet[position].imageUrl)
             val drawable = Drawable.createFromStream(inputStream, null)
-            viewHolder.tvRecipeName.text = recipeTitle.text
             viewHolder.ivRecipeImage.setImageDrawable(drawable)
             recipeTitle.text = dataSet[position].title
         } catch (e: Exception) {

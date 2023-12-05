@@ -30,7 +30,9 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
 
         recipeID = arguments?.let { Constants.ARG_RECIPE_ID }
         recipeTitle = arguments?.let { Constants.ARG_RECIPE_NAME }
-        recipeImageUrl = arguments?.let { Constants.ARG_RECIPE_IMAGE_URL }
+        recipeImageUrl = arguments?.let {
+            it.getString(Constants.ARG_RECIPE_IMAGE_URL)
+        }
 
         val fragment = context
         val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }

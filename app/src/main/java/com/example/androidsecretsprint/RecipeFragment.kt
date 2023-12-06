@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.androidsecretsprint.databinding.RecipeBinding
+import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {
-    private lateinit var binding: RecipeBinding
+    private lateinit var binding: FragmentRecipeBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = RecipeBinding.inflate(inflater, container, false)
+        binding = FragmentRecipeBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

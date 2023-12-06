@@ -28,7 +28,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
 
-        cvRecipeID = arguments?.let { Constants.ARG_RECIPE_ID }
+        cvRecipeID = arguments?.getString(Constants.ARG_CATEGORY_ID)
         tvRecipeTitle = arguments?.getString(Constants.ARG_CATEGORY_NAME)
         ivRecipeImageUrl = arguments?.getString(Constants.ARG_CATEGORY_IMAGE_URL)
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.androidsecretsprint.databinding.RecipeBinding
 
-class RecipeFragment : Fragment(R.layout.recipe) {
+class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private lateinit var binding: RecipeBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

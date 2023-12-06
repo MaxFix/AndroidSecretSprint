@@ -50,10 +50,9 @@ class RecipesListAdapter(
             Log.e(
                 "!!!", "onBindViewHolder : asset error ${e.printStackTrace()}"
             )
-
-            viewHolder.cvRecipeItem.setOnClickListener {
-                itemClickListener?.onItemClick(dataSet[position].id)
-            }
+        }
+        viewHolder.cvRecipeItem.setOnClickListener {
+            itemClickListener?.onItemClick(dataSet[position].id)
         }
     }
 

@@ -59,6 +59,9 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
             Constants.ARG_RECIPE_NAME to tvRecipeTitle,
             Constants.ARG_RECIPE_IMAGE_URL to ivRecipeImageUrl
         )
+
+        bundle.putParcelable("recipe", recipe)
+
         parentFragmentManager.commit {
             setReorderingAllowed(true)
             replace<RecipeFragment>(R.id.mainContainer, args = bundle)

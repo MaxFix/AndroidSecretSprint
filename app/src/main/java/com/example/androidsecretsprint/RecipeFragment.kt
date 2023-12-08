@@ -25,10 +25,8 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         val recipeDescriptionDeprecated: TextView = binding.recipeDescriptionDeprecated
         val recipeDescriptionNew: TextView = binding.recipeDescriptionNew
 
-        val bundle = Bundle()
-
         val recipeDeprecated = arguments?.getParcelable<Recipe>("recipe")
-        val recipeNew: Recipe? = bundle.getParcelable("recipe", Recipe::class.java)
+        val recipeNew: Recipe? = arguments?.getParcelable("recipe", Recipe::class.java)
         recipeNew?.let { recipe: Recipe ->
             recipeDescriptionNew.text = recipe.title
         }

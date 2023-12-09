@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="224dp">
+    android:layout_height="match_parent"
+    android:background="@drawable/ripple_effect"
+    android:backgroundTint="@color/main_activity_background_color"
+    android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="224dp">
+
+        <ImageView
+            android:id="@+id/recipeHeaderImg"
+            android:layout_width="match_parent"
+            android:layout_height="224dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recipeHeaderText"
+            style="@style/StyleHeaderButton20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/main_padding"
+            android:layout_marginEnd="102dp"
+            android:layout_marginBottom="@dimen/main_padding"
+            android:background="@drawable/shape_header_rounded_corners"
+            android:gravity="start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 
@@ -18,19 +17,18 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val recipeDescription: TextView = binding.recipeDescription
 
-        val recipeDescriptionDeprecated: TextView = binding.recipeDescriptionDeprecated
-        val recipeDescriptionNew: TextView = binding.recipeDescriptionNew
-
-        val recipeDeprecated = arguments?.getParcelable<Recipe>("recipe")
-        val recipeNew: Recipe? = arguments?.getParcelable("recipe", Recipe::class.java)
-        recipeNew?.let { recipe: Recipe ->
-            recipeDescriptionNew.text = recipe.title
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
+            val recipeParcelable: Recipe? = arguments?.getParcelable("recipe", Recipe::class.java)
+            recipeParcelable?.let { recipe: Recipe ->
+                recipeDescription.text = recipe.title
+            }
+        } else {
+            val recipeParcelable = arguments?.getParcelable<Recipe>("recipe")
+            recipeDescription.text = recipeParcelable?.title
         }
-
-        recipeDescriptionDeprecated.text = recipeDeprecated?.title
     }
 }

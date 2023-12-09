@@ -16,9 +16,9 @@ import java.io.InputStream
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     private lateinit var binding: FragmentRecipesListBinding
 
-    private var cvRecipeID: String? = null
-    private var tvRecipeTitle: String? = null
-    private var ivRecipeImageUrl: String? = null
+    private var recipeID: String? = null
+    private var recipeTitle: String? = null
+    private var recipeImageUrl: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipesListBinding.inflate(inflater, container, false)
@@ -29,15 +29,15 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
 
-        cvRecipeID = arguments?.getString(Constants.ARG_CATEGORY_ID)
-        tvRecipeTitle = arguments?.getString(Constants.ARG_CATEGORY_NAME)
-        ivRecipeImageUrl = arguments?.getString(Constants.ARG_CATEGORY_IMAGE_URL)
+        recipeID = arguments?.getString(Constants.ARG_CATEGORY_ID)
+        recipeTitle = arguments?.getString(Constants.ARG_CATEGORY_NAME)
+        recipeImageUrl = arguments?.getString(Constants.ARG_CATEGORY_IMAGE_URL)
 
         val fragment = context
-        val inputStream: InputStream? = ivRecipeImageUrl?.let { fragment?.assets?.open(it) }
+        val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }
         val drawable = Drawable.createFromStream(inputStream, null)
         binding.recipesListHeaderImg.setImageDrawable(drawable)
-        binding.recipesListHeaderText.text = tvRecipeTitle
+        binding.recipesListHeaderText.text = recipeTitle
     }
 
     private fun initRecycler() {
@@ -56,8 +56,8 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         val recipe = STUB_RECIPES.burgerRecipes[recipeId]
         val bundle = bundleOf(
             Constants.ARG_RECIPE_ID to recipeId,
-            Constants.ARG_RECIPE_NAME to tvRecipeTitle,
-            Constants.ARG_RECIPE_IMAGE_URL to ivRecipeImageUrl
+            Constants.ARG_RECIPE_NAME to recipeTitle,
+            Constants.ARG_RECIPE_IMAGE_URL to recipeImageUrl
         )
 
         bundle.putParcelable("recipe", recipe)

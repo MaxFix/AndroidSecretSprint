@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ripple_effect"
@@ -9,7 +10,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="224dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/recipeIngredientsTitle"
+        app:layout_constraintStart_toEndOf="@+id/recipeIngredientsTitle">
 
         <ImageView
             android:id="@+id/recipeHeaderImg"
@@ -26,13 +30,74 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/main_padding"
-            android:layout_marginEnd="102dp"
             android:layout_marginBottom="@dimen/main_padding"
             android:background="@drawable/shape_header_rounded_corners"
             android:gravity="start"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/recipeHeaderImg"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipeHeaderImg">
+
+            <TextView
+                android:id="@+id/recipeIngredientsTitle"
+                style="@style/StyleHeaderButton20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_padding"
+                android:layout_marginTop="@dimen/main_padding"
+                android:layout_marginEnd="@dimen/main_padding"
+                android:layout_marginBottom="@dimen/main_padding"
+                app:layout_constraintStart_toStartOf="@+id/recipeHeaderImg"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:text="Ингридиенты" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvIngredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_padding"
+                android:layout_marginTop="@dimen/main_padding"
+                android:layout_marginEnd="@dimen/main_padding"
+                android:layout_marginBottom="@dimen/main_padding"
+                android:backgroundTint="@color/text_btn_color"
+                android:padding="@dimen/main_padding"
+                app:layout_constraintStart_toStartOf="@+id/recipeHeaderImg"
+                app:layout_constraintTop_toBottomOf="@+id/recipeIngredientsTitle"
+                app:spanCount="1"
+                tools:itemCount="9" />
+
+            <TextView
+                android:id="@+id/recipeMethodTitle"
+                style="@style/StyleHeaderButton20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_padding"
+                android:layout_marginTop="@dimen/main_padding"
+                android:layout_marginEnd="@dimen/main_padding"
+                android:layout_marginBottom="@dimen/main_padding"
+                app:layout_constraintStart_toStartOf="@+id/recipeHeaderImg"
+                app:layout_constraintTop_toBottomOf="@+id/rvIngredients"
+                tools:text="Способ приготовления" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_padding"
+                android:layout_marginTop="@dimen/main_padding"
+                android:backgroundTint="@color/text_btn_color"
+                app:layout_constraintStart_toStartOf="@+id/recipeHeaderImg"
+                app:layout_constraintTop_toBottomOf="@id/recipeMethodTitle"
+                app:spanCount="1"
+                tools:itemCount="9" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

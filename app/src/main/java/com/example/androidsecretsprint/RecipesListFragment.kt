@@ -60,7 +60,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
             Constants.ARG_RECIPE_IMAGE_URL to recipeImageUrl
         )
 
-        bundle.putParcelable("recipe", recipe)
+        bundle.putParcelable(Constants.ARG_RECIPE, recipe)
 
         parentFragmentManager.commit {
             setReorderingAllowed(true)

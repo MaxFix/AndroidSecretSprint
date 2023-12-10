@@ -9,5 +9,7 @@ class Constants {
         const val ARG_RECIPE_ID = "RECIPE_ID"
         const val ARG_RECIPE_NAME = "RECIPE_NAME"
         const val ARG_RECIPE_IMAGE_URL = "RECIPE_IMAGE_URL"
+
+        const val ARG_RECIPE = "RECIPE"
     }
 }

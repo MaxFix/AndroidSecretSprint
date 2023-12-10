@@ -20,15 +20,15 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recipeDescription: TextView = binding.recipeDescription
-
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
-            val recipeParcelable: Recipe? = arguments?.getParcelable("recipe", Recipe::class.java)
-            recipeParcelable?.let { recipe: Recipe ->
-                recipeDescription.text = recipe.title
-            }
+        var recipeParcelable: Recipe? = arguments?.getParcelable(Constants.ARG_RECIPE)
+        recipeParcelable = if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelable(Constants.ARG_RECIPE, Recipe::class.java)
         } else {
-            val recipeParcelable = arguments?.getParcelable<Recipe>("recipe")
-            recipeDescription.text = recipeParcelable?.title
+            recipeParcelable
+        }
+
+        recipeParcelable?.let { recipe ->
+            recipeDescription.text = recipe.title
         }
     }
 }

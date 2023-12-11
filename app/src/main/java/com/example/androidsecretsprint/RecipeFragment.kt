@@ -26,12 +26,11 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         val recipeHeaderImage: ImageView = binding.recipeHeaderImg
 
         val fragment = context
-        var recipeParcelable: Recipe? = arguments?.getParcelable(Constants.ARG_RECIPE)
 
-        recipeParcelable = if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
+        val recipeParcelable = if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
             arguments?.getParcelable(Constants.ARG_RECIPE, Recipe::class.java)
         } else {
-            recipeParcelable
+            arguments?.getParcelable(Constants.ARG_RECIPE)
         }
 
         recipeParcelable?.let { recipe ->

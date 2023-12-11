@@ -1,0 +1,56 @@
+package com.example.androidsecretsprint
+
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+
+class IngredientsAdapter(
+    private val dataSet: List<Ingredient>,
+    private val fragment: RecipeFragment,
+) :
+    RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+    private var itemClickListener: RecipesListAdapter.OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: RecipesListAdapter.OnItemClickListener) { // callback
+        itemClickListener = listener
+    }
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val ingredientName: TextView = view.findViewById(R.id.ingredientName)
+        val ingredientCount: TextView = view.findViewById(R.id.ingredientCount)
+        val ingredientMeasure: TextView = view.findViewById(R.id.ingredientMeasure)
+    }
+
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.item_ingredient, viewGroup, false) // хз что тут вместо item_recipe
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
+        val ingredientName = viewHolder.ingredientName
+        val ingredientCount = viewHolder.ingredientCount
+        val ingredientMeasure = viewHolder.ingredientMeasure
+
+        try {
+            viewHolder.ingredientName.text = ingredientName.text
+            viewHolder.ingredientCount.text = ingredientCount.text
+            viewHolder.ingredientMeasure.text = ingredientMeasure.text
+            ingredientName.text = dataSet[position].description
+            ingredientCount.text = dataSet[position].quantity
+            ingredientMeasure.text = dataSet[position].unitOfMeasure
+
+        } catch (e: Exception) {
+            Log.e(
+                "!!!", "onBindViewHolder : asset error ${e.printStackTrace()}"
+            )
+        }
+    }
+
+    override fun getItemCount() = dataSet.size
+
+}

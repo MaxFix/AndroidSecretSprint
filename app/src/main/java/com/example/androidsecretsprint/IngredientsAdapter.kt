@@ -9,14 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class IngredientsAdapter(
     private val dataSet: List<Ingredient>,
-    private val fragment: RecipeFragment,
 ) :
     RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
     private var itemClickListener: RecipesListAdapter.OnItemClickListener? = null
-
-    fun setOnItemClickListener(listener: RecipesListAdapter.OnItemClickListener) { // callback
-        itemClickListener = listener
-    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ingredientName: TextView = view.findViewById(R.id.ingredientName)

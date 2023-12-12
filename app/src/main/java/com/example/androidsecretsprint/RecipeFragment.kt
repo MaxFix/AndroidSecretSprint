@@ -41,7 +41,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             recipeHeaderImage.setImageDrawable(drawable)
         }
 
-        val ingredientsAdapter = recipeParcelable?.let { IngredientsAdapter(dataSet = it.ingredients, fragment = this) }
+        val ingredientsAdapter = recipeParcelable?.let { IngredientsAdapter(it.ingredients) }
         val recyclerView = binding.rvIngredients
         recyclerView.adapter = ingredientsAdapter
     }

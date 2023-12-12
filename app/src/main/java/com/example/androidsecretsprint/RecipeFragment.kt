@@ -22,6 +22,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val recipeDescription: TextView = binding.recipeHeaderText
         val recipeHeaderImage: ImageView = binding.recipeHeaderImg
 
@@ -39,5 +40,10 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             val drawable = Drawable.createFromStream(inputStream, null)
             recipeHeaderImage.setImageDrawable(drawable)
         }
+
+        val ingredientsAdapter = recipeParcelable?.let { IngredientsAdapter(dataSet = it.ingredients, fragment = this) }
+        val recyclerView = binding.rvIngredients
+        recyclerView.adapter = ingredientsAdapter
     }
+
 }

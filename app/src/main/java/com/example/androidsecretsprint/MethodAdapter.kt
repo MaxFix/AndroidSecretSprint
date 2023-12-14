@@ -38,6 +38,7 @@ class MethodAdapter(
                 )
             )
             methodDescription.text = "$index. ${dataSet[position]}"
+            methodDescription.textSize = 14F
         } catch (e: Exception) {
             Log.e(
                 "!!!", "onBindViewHolder : asset error ${e.printStackTrace()}"

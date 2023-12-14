@@ -4,6 +4,6 @@
     android:insetRight="12dp">
     <shape>
         <size android:height="1dp" />
-        <solid android:color="#E11A1A" />
+        <solid android:color="@color/recycle_view_divider_color" />
     </shape>
 </inset>

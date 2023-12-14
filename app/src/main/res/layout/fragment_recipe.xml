@@ -4,28 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ripple_effect"
     android:backgroundTint="@color/main_activity_background_color"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/recipeIngredientsTitle"
-        app:layout_constraintStart_toEndOf="@+id/recipeIngredientsTitle">
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/recipeHeaderImg"
+            android:id="@+id/ivRecipeHeaderImg"
             android:layout_width="match_parent"
             android:layout_height="224dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/burger" />
 
         <TextView
-            android:id="@+id/recipeHeaderText"
+            android:id="@+id/tvRecipeHeaderText"
             style="@style/StyleHeaderButton20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,70 +31,71 @@
             android:layout_marginBottom="@dimen/main_padding"
             android:background="@drawable/shape_header_rounded_corners"
             android:gravity="start"
-            app:layout_constraintBottom_toBottomOf="@+id/recipeHeaderImg"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/ivRecipeHeaderImg"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Бургеры с грибами и сыром" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/recipeLinearLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recipeHeaderImg">
+            app:layout_constraintTop_toBottomOf="@+id/ivRecipeHeaderImg"
+            tools:layoutManager="LinearLayoutManager">
 
             <TextView
-                android:id="@+id/recipeIngredientsTitle"
+                android:id="@+id/tvRecipeIngredientsTitle"
                 style="@style/StyleHeaderButton20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/main_padding"
-                android:layout_marginTop="@dimen/main_padding"
-                android:layout_marginEnd="@dimen/main_padding"
-                android:layout_marginBottom="@dimen/main_padding"
-                app:layout_constraintStart_toStartOf="@+id/recipeHeaderImg"
+                android:layout_marginHorizontal="@dimen/main_padding"
+                android:text="@string/title_ingridients"
+                app:layout_constraintStart_toStartOf="@+id/ivRecipeHeaderImg"
                 app:layout_constraintTop_toBottomOf="parent"
-                tools:text="Ингридиенты" />
+                tools:text="ингредиенты" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvIngredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/main_padding"
-                android:layout_marginTop="@dimen/main_padding"
-                android:layout_marginEnd="@dimen/main_padding"
-                android:layout_marginBottom="@dimen/main_padding"
+                android:layout_marginHorizontal="@dimen/main_padding"
+                android:background="@drawable/shape_header_rounded_corners"
                 android:backgroundTint="@color/text_btn_color"
-                android:padding="@dimen/main_padding"
-                app:layout_constraintStart_toStartOf="@+id/recipeHeaderImg"
-                app:layout_constraintTop_toBottomOf="@+id/recipeIngredientsTitle"
+                android:text="@string/title_method"
+                app:layout_constraintStart_toStartOf="@+id/ivRecipeHeaderImg"
+                app:layout_constraintTop_toBottomOf="@+id/tvRecipeIngredientsTitle"
                 app:spanCount="1"
-                tools:itemCount="9" />
+                tools:itemCount="9"
+                tools:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/item_ingredient" />
 
             <TextView
-                android:id="@+id/recipeMethodTitle"
+                android:id="@+id/tvRecipeMethodTitle"
                 style="@style/StyleHeaderButton20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/main_padding"
-                android:layout_marginTop="@dimen/main_padding"
-                android:layout_marginEnd="@dimen/main_padding"
-                android:layout_marginBottom="@dimen/main_padding"
-                app:layout_constraintStart_toStartOf="@+id/recipeHeaderImg"
+                android:layout_marginHorizontal="@dimen/main_padding"
+                android:backgroundTint="@color/text_btn_color"
+                android:text="@string/title_method"
+                app:layout_constraintStart_toStartOf="@+id/ivRecipeHeaderImg"
                 app:layout_constraintTop_toBottomOf="@+id/rvIngredients"
-                tools:text="Способ приготовления" />
+                tools:text="@string/title_method" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/main_padding"
-                android:layout_marginTop="@dimen/main_padding"
+                android:layout_marginHorizontal="@dimen/main_padding"
+                android:background="@drawable/shape_header_rounded_corners"
                 android:backgroundTint="@color/text_btn_color"
-                app:layout_constraintStart_toStartOf="@+id/recipeHeaderImg"
-                app:layout_constraintTop_toBottomOf="@id/recipeMethodTitle"
+                app:layout_constraintStart_toStartOf="@+id/ivRecipeHeaderImg"
+                app:layout_constraintTop_toBottomOf="@id/tvRecipeMethodTitle"
                 app:spanCount="1"
-                tools:itemCount="9" />
+                tools:layoutManager="LinearLayoutManager"
+                tools:itemCount="9"
+                tools:listitem="@layout/item_method" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

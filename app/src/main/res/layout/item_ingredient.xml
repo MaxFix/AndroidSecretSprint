@@ -11,11 +11,11 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/ingredientName"
+        android:id="@+id/tvRecipeIngredientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/ingredient_padding"
-        tools:text="text1" />
+        tools:text="Булочка для бургеров" />
 
     <View
         android:layout_width="0dp"
@@ -23,19 +23,19 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/ingredientCount"
+        android:id="@+id/tvRecipeIngredientCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        tools:text="text2" />
+        tools:text="1 " />
 
     <TextView
-        android:id="@+id/ingredientMeasure"
+        android:id="@+id/tvRecipeIngredientMeasure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginEnd="@dimen/ingredient_padding"
         android:gravity="end"
-        tools:text="text3" />
+        tools:text="шт." />
 
 </LinearLayout>

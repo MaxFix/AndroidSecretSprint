@@ -8,7 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 import java.io.InputStream
 
@@ -18,13 +22,15 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipeBinding.inflate(inflater, container, false)
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recipeDescription: TextView = binding.recipeHeaderText
-        val recipeHeaderImage: ImageView = binding.recipeHeaderImg
+        val recipeDescription: TextView = binding.tvRecipeHeaderText
+        val recipeHeaderImage: ImageView = binding.ivRecipeHeaderImg
 
         val fragment = context
 
@@ -41,9 +47,29 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             recipeHeaderImage.setImageDrawable(drawable)
         }
 
+
         val ingredientsAdapter = recipeParcelable?.let { IngredientsAdapter(it.ingredients) }
-        val recyclerView = binding.rvIngredients
-        recyclerView.adapter = ingredientsAdapter
+        val recyclerViewIngredients = binding.rvIngredients
+
+        val dividerItemDecorationIngredients = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        val divider = ContextCompat.getDrawable(requireContext(), R.drawable.custom_divider)
+        dividerItemDecorationIngredients.setDrawable(divider!!)
+        recyclerViewIngredients.addItemDecoration(dividerItemDecorationIngredients)
+
+
+        recyclerViewIngredients.adapter = ingredientsAdapter
+        recyclerViewIngredients.layoutManager = LinearLayoutManager(context)
+
+
+        val methodAdapter = recipeParcelable?.let { MethodAdapter(it.method) }
+        val recyclerViewMethods = binding.rvMethod
+
+        val dividerItemDecorationMethods = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        dividerItemDecorationMethods.setDrawable(divider)
+        recyclerViewMethods.addItemDecoration(dividerItemDecorationMethods)
+
+        recyclerViewMethods.adapter = methodAdapter
+        recyclerViewMethods.layoutManager = LinearLayoutManager(context)
     }
 
 }

@@ -93,8 +93,8 @@
                 app:layout_constraintStart_toStartOf="@+id/ivRecipeHeaderImg"
                 app:layout_constraintTop_toBottomOf="@id/tvRecipeMethodTitle"
                 app:spanCount="1"
-                tools:layoutManager="LinearLayoutManager"
                 tools:itemCount="9"
+                tools:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/item_method" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

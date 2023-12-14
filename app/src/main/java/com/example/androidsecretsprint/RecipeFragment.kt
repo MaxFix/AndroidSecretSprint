@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
@@ -51,11 +50,13 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         val ingredientsAdapter = recipeParcelable?.let { IngredientsAdapter(it.ingredients) }
         val recyclerViewIngredients = binding.rvIngredients
 
-        val dividerItemDecorationIngredients = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        val dividerItemDecorationIngredients = context?.let { CustomDividerItemDecoration(it, RecyclerView.VERTICAL) }
         val divider = ContextCompat.getDrawable(requireContext(), R.drawable.custom_divider)
-        dividerItemDecorationIngredients.setDrawable(divider!!)
-        recyclerViewIngredients.addItemDecoration(dividerItemDecorationIngredients)
-
+        dividerItemDecorationIngredients?.setDrawable(divider!!)
+        dividerItemDecorationIngredients?.setLastItemDecorated(false)
+        if (dividerItemDecorationIngredients != null) {
+            recyclerViewIngredients.addItemDecoration(dividerItemDecorationIngredients)
+        }
 
         recyclerViewIngredients.adapter = ingredientsAdapter
         recyclerViewIngredients.layoutManager = LinearLayoutManager(context)
@@ -64,9 +65,12 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         val methodAdapter = recipeParcelable?.let { MethodAdapter(it.method) }
         val recyclerViewMethods = binding.rvMethod
 
-        val dividerItemDecorationMethods = DividerItemDecoration(context, RecyclerView.VERTICAL)
-        dividerItemDecorationMethods.setDrawable(divider)
-        recyclerViewMethods.addItemDecoration(dividerItemDecorationMethods)
+        val dividerItemDecorationMethods = context?.let { CustomDividerItemDecoration(it, RecyclerView.VERTICAL) }
+        dividerItemDecorationMethods?.setDrawable(divider!!)
+        dividerItemDecorationMethods?.setLastItemDecorated(false)
+        if (dividerItemDecorationMethods != null) {
+            recyclerViewMethods.addItemDecoration(dividerItemDecorationMethods)
+        }
 
         recyclerViewMethods.adapter = methodAdapter
         recyclerViewMethods.layoutManager = LinearLayoutManager(context)

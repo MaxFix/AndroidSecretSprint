@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 import java.io.InputStream
 
@@ -34,9 +35,9 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         val fragment = context
 
         val recipeParcelable = if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable(Constants.ARG_RECIPE, Recipe::class.java)
+            arguments?.getParcelable(ARG_RECIPE, Recipe::class.java)
         } else {
-            arguments?.getParcelable(Constants.ARG_RECIPE)
+            arguments?.getParcelable(ARG_RECIPE)
         }
 
         recipeParcelable?.let { recipe ->

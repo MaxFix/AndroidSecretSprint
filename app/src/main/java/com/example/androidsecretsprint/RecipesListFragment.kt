@@ -10,6 +10,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_ID
+import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_IMAGE_URL
+import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_NAME
+import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE
+import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_ID
+import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_IMAGE_URL
+import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_NAME
 import com.example.androidsecretsprint.databinding.FragmentRecipesListBinding
 import java.io.InputStream
 
@@ -28,11 +35,23 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
+        initArgs()
+        initUI()
 
-        recipeID = arguments?.getString(Constants.ARG_CATEGORY_ID)
-        recipeTitle = arguments?.getString(Constants.ARG_CATEGORY_NAME)
-        recipeImageUrl = arguments?.getString(Constants.ARG_CATEGORY_IMAGE_URL)
+        val fragment = context
+        val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }
+        val drawable = Drawable.createFromStream(inputStream, null)
+        binding.recipesListHeaderImg.setImageDrawable(drawable)
+        binding.recipesListHeaderText.text = recipeTitle
+    }
 
+    private fun initArgs() {
+        recipeID = arguments?.getString(ARG_CATEGORY_ID)
+        recipeTitle = arguments?.getString(ARG_CATEGORY_NAME)
+        recipeImageUrl = arguments?.getString(ARG_CATEGORY_IMAGE_URL)
+    }
+
+    private fun initUI() {
         val fragment = context
         val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }
         val drawable = Drawable.createFromStream(inputStream, null)
@@ -55,12 +74,12 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     fun openRecipeByRecipeId(recipeId: Int) {
         val recipe = STUB_RECIPES.burgerRecipes[recipeId]
         val bundle = bundleOf(
-            Constants.ARG_RECIPE_ID to recipeId,
-            Constants.ARG_RECIPE_NAME to recipeTitle,
-            Constants.ARG_RECIPE_IMAGE_URL to recipeImageUrl
+            ARG_RECIPE_ID to recipeId,
+            ARG_RECIPE_NAME to recipeTitle,
+            ARG_RECIPE_IMAGE_URL to recipeImageUrl
         )
 
-        bundle.putParcelable(Constants.ARG_RECIPE, recipe)
+        bundle.putParcelable(ARG_RECIPE, recipe)
 
         parentFragmentManager.commit {
             setReorderingAllowed(true)

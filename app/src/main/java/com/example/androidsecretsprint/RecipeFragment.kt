@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -74,7 +73,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         val dividerItemDecoration = context?.let {
             CustomDividerItemDecoration(it, RecyclerView.VERTICAL)
         }
-        val divider = ContextCompat.getDrawable(requireContext(), R.drawable.custom_divider)
         dividerItemDecoration?.setLastItemDecorated(false)
         return dividerItemDecoration!!
     }

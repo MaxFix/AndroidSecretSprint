@@ -1,7 +1,6 @@
 package com.example.androidsecretsprint
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,21 +28,15 @@ class MethodAdapter(
         val index = position + 1
         val methodDescription = viewHolder.methodNumber
 
-        try {
-            viewHolder.methodNumber.text = methodDescription.text
-            viewHolder.methodNumber.setTextColor(
-                ContextCompat.getColor(
-                    viewHolder.itemView.context,
-                    R.color.description_categories_color
-                )
+        viewHolder.methodNumber.text = methodDescription.text
+        viewHolder.methodNumber.setTextColor(
+            ContextCompat.getColor(
+                viewHolder.itemView.context,
+                R.color.description_categories_color
             )
-            methodDescription.text = "$index. ${dataSet[position]}"
-            methodDescription.textSize = 14F
-        } catch (e: Exception) {
-            Log.e(
-                "!!!", "onBindViewHolder : asset error ${e.printStackTrace()}"
-            )
-        }
+        )
+        methodDescription.text = "$index. ${dataSet[position]}"
+        methodDescription.textSize = 14F
     }
 
     override fun getItemCount() = dataSet.size

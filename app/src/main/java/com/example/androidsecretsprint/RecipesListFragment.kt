@@ -38,8 +38,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         initArgs()
         initUI()
 
-        val fragment = context
-        val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }
+        val inputStream: InputStream? = recipeImageUrl?.let { this.context?.assets?.open(it) }
         val drawable = Drawable.createFromStream(inputStream, null)
         binding.recipesListHeaderImg.setImageDrawable(drawable)
         binding.recipesListHeaderText.text = recipeTitle
@@ -52,8 +51,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     }
 
     private fun initUI() {
-        val fragment = context
-        val inputStream: InputStream? = recipeImageUrl?.let { fragment?.assets?.open(it) }
+        val inputStream: InputStream? = recipeImageUrl?.let { this.context?.assets?.open(it) }
         val drawable = Drawable.createFromStream(inputStream, null)
         binding.recipesListHeaderImg.setImageDrawable(drawable)
         binding.recipesListHeaderText.text = recipeTitle

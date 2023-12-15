@@ -58,7 +58,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvIngredients"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/main_padding"
                 android:background="@drawable/shape_header_rounded_corners"

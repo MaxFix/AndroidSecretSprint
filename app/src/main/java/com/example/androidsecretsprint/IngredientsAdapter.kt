@@ -55,9 +55,9 @@ class IngredientsAdapter(
                     R.color.description_categories_color
                 )
             )
-            ingredientName.text = dataSet[position].description.uppercase()
-            ingredientCount.text = "${dataSet[position].quantity.uppercase()} "
-            ingredientMeasure.text = dataSet[position].unitOfMeasure.uppercase()
+            ingredientName.text = dataSet[position].description
+            ingredientCount.text = "${dataSet[position].quantity} "
+            ingredientMeasure.text = dataSet[position].unitOfMeasure
 
         } catch (e: Exception) {
             Log.e(

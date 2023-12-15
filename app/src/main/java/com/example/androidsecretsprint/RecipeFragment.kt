@@ -54,7 +54,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
                 layoutManager = LinearLayoutManager(context)
                 addItemDecoration(createCustomDivider())
             }
-
         }
     }
 
@@ -65,7 +64,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
                 layoutManager = LinearLayoutManager(context)
                 addItemDecoration(createCustomDivider())
             }
-
         }
     }
 

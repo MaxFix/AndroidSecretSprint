@@ -6,4 +6,5 @@
     <color name="background_btn_favorites_color">#E13E3E</color>
     <color name="title_categories_color">#5F3678</color>
     <color name="description_categories_color">#666666</color>
+    <color name="recycle_view_divider_color">#F5F5F5</color>
 </resources>

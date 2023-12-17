@@ -13,10 +13,10 @@ import androidx.fragment.app.replace
 import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_ID
 import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_IMAGE_URL
 import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_NAME
+import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_ID
 import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_IMAGE_URL
 import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_NAME
-import com.example.androidsecretsprint.Constants.Companion.arg_recipe
 import com.example.androidsecretsprint.databinding.FragmentRecipesListBinding
 import java.io.InputStream
 
@@ -77,7 +77,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
             ARG_RECIPE_IMAGE_URL to recipeImageUrl
         )
 
-        bundle.putParcelable(arg_recipe, recipe)
+        bundle.putParcelable(ARG_RECIPE, recipe)
 
         parentFragmentManager.commit {
             setReorderingAllowed(true)

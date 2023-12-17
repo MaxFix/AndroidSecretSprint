@@ -2,14 +2,14 @@ package com.example.androidsecretsprint
 
 class Constants {
     companion object {
-        const val ARG_CATEGORY_ID = "ARG_CATEGORY_ID"
-        const val ARG_CATEGORY_NAME = "ARG_CATEGORY_NAME"
-        const val ARG_CATEGORY_IMAGE_URL = "ARG_CATEGORY_IMAGE_URL"
+        const val ARG_CATEGORY_ID = "arg_category_id"
+        const val ARG_CATEGORY_NAME = "arg_category_name"
+        const val ARG_CATEGORY_IMAGE_URL = "arg_category_image_url"
 
-        const val ARG_RECIPE_ID = "ARG_RECIPE_ID"
-        const val ARG_RECIPE_NAME = "ARG_RECIPE_NAME"
-        const val ARG_RECIPE_IMAGE_URL = "ARG_RECIPE_IMAGE_URL"
+        const val ARG_RECIPE_ID = "arg_recipe_id"
+        const val ARG_RECIPE_NAME = "arg_recipe_name"
+        const val ARG_RECIPE_IMAGE_URL = "arg_recipe_image_url"
 
-        const val arg_recipe = "ARG_RECIPE"
+        const val ARG_RECIPE = "arg_recipe"
     }
 }

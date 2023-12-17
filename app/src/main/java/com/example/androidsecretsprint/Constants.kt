@@ -10,6 +10,6 @@ class Constants {
         const val ARG_RECIPE_NAME = "ARG_RECIPE_NAME"
         const val ARG_RECIPE_IMAGE_URL = "ARG_RECIPE_IMAGE_URL"
 
-        const val ARG_RECIPE = "ARG_RECIPE"
+        const val arg_recipe = "ARG_RECIPE"
     }
 }

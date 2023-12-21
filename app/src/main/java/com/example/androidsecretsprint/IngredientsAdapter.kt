@@ -29,15 +29,16 @@ class IngredientsAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val ingredient = dataSet[position].quantity
 
         val ingredientName = viewHolder.ingredientName
         val ingredientCount = viewHolder.ingredientCount
         val ingredientMeasure = viewHolder.ingredientMeasure
-        val totalQuantity = ingredientCount.text.toString().toInt() * quantity
-        val displayQuantity = if ((totalQuantity % 1).toFloat() == 0f) {
-            totalQuantity.toString()
+        val totalQuantity = ingredient.toFloat() * quantity
+        val displayQuantity = if ((totalQuantity % 1) == 0f) {
+            totalQuantity.toInt().toString() // Убираем ненужные десятичные знаки, если число целое
         } else {
-            String.format("%.1f", totalQuantity)
+            String.format("%.1f", totalQuantity) // Форматируем вывод одного десятичного знака
         }
 
         try {
@@ -76,8 +77,9 @@ class IngredientsAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateIngredients(progress: Int) {
         quantity = progress
+        notifyDataSetChanged()
     }
-
 }

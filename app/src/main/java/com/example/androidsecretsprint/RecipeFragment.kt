@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,6 +49,23 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     }
 
     private fun initIngredientsRecycler(recipe: Recipe?) {
+        recipe?.ingredients?.let { ingredients ->
+            val seekBarChangeListener = object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    // Обработать изменение ползунка
+                    IngredientsAdapter(ingredients).updateIngredients(progress)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                    // Обработать начало взаимодействия с ползунком
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    // Обработать окончание взаимодействия с ползунком
+                }
+            }
+
+        }
         recipe?.ingredients?.let { ingredients ->
             binding.rvIngredients.apply {
                 adapter = IngredientsAdapter(ingredients)

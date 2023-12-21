@@ -13,6 +13,7 @@ class IngredientsAdapter(
     private val dataSet: List<Ingredient>,
 ) :
     RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+    private var quantity = 1
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ingredientName: TextView = view.findViewById(R.id.tvRecipeIngredientName)
@@ -32,10 +33,16 @@ class IngredientsAdapter(
         val ingredientName = viewHolder.ingredientName
         val ingredientCount = viewHolder.ingredientCount
         val ingredientMeasure = viewHolder.ingredientMeasure
+        val totalQuantity = ingredientCount.text.toString().toInt() * quantity
+        val displayQuantity = if ((totalQuantity % 1).toFloat() == 0f) {
+            totalQuantity.toString()
+        } else {
+            String.format("%.1f", totalQuantity)
+        }
 
         try {
             viewHolder.ingredientName.text = ingredientName.text
-            viewHolder.ingredientCount.text = ingredientCount.text
+            viewHolder.ingredientCount.text = displayQuantity
             viewHolder.ingredientMeasure.text = ingredientMeasure.text
             viewHolder.ingredientName.setTextColor(
                 ContextCompat.getColor(
@@ -56,6 +63,7 @@ class IngredientsAdapter(
                 )
             )
             ingredientName.text = dataSet[position].description
+
             ingredientCount.text = "${dataSet[position].quantity} "
             ingredientMeasure.text = dataSet[position].unitOfMeasure
 
@@ -67,5 +75,9 @@ class IngredientsAdapter(
     }
 
     override fun getItemCount() = dataSet.size
+
+    fun updateIngredients(progress: Int) {
+        quantity = progress
+    }
 
 }

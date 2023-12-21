@@ -45,16 +45,60 @@
             app:layout_constraintTop_toBottomOf="@+id/ivRecipeHeaderImg"
             tools:layoutManager="LinearLayoutManager">
 
-            <TextView
-                android:id="@+id/tvRecipeIngredientsTitle"
-                style="@style/StyleHeaderButton20"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/main_padding"
-                android:text="@string/title_ingridients"
-                app:layout_constraintStart_toStartOf="@+id/ivRecipeHeaderImg"
-                app:layout_constraintTop_toBottomOf="parent"
-                tools:text="ингредиенты" />
+                android:layout_marginTop="@dimen/main_padding"
+                android:layout_marginBottom="@dimen/main_padding"
+                app:layout_constraintTop_toBottomOf="@+id/ivRecipeHeaderImg">
+
+                <TextView
+                    android:id="@+id/tvRecipeIngredientsTitle"
+                    style="@style/StyleIngredientsTitle20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_ingridients"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="ингредиенты" />
+
+                <TextView
+                    android:id="@+id/tvPortionsSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ingredient_padding_half"
+                    android:fontFamily="@font/montserrat_alternates_medium"
+                    android:paddingHorizontal="26dp"
+                    android:text="@string/subtitle_portions"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/sbPortionsCount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRecipeIngredientsTitle" />
+
+                <TextView
+                    android:id="@+id/tvPortionsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/ingredient_padding_half"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvPortionsSubtitle"
+                    app:layout_constraintStart_toEndOf="@+id/tvPortionsSubtitle"
+                    app:layout_constraintTop_toTopOf="@+id/tvPortionsSubtitle"
+                    tools:text="3" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/sbPortionsCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="26dp"
+                    android:layout_marginTop="@dimen/ingredient_padding_half"
+                    android:max="5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPortionsSubtitle"
+                    tools:progress="3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvIngredients"

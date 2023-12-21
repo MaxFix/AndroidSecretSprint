@@ -29,12 +29,12 @@ class IngredientsAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val ingredient = dataSet[position].quantity
+        val ingredientCurrentCount = dataSet[position].quantity
 
         val ingredientName = viewHolder.ingredientName
         val ingredientCount = viewHolder.ingredientCount
         val ingredientMeasure = viewHolder.ingredientMeasure
-        val totalQuantity = ingredient.toFloat() * quantity
+        val totalQuantity = ingredientCurrentCount.toFloat() * quantity
         val displayQuantity = if ((totalQuantity % 1) == 0f) {
             totalQuantity.toInt().toString() // Убираем ненужные десятичные знаки, если число целое
         } else {

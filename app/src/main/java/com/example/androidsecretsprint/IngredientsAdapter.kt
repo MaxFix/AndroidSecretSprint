@@ -65,7 +65,7 @@ class IngredientsAdapter(
             )
             ingredientName.text = dataSet[position].description
 
-            ingredientCount.text = "${dataSet[position].quantity} "
+            ingredientCount.text = "${displayQuantity} "
             ingredientMeasure.text = dataSet[position].unitOfMeasure
 
         } catch (e: Exception) {

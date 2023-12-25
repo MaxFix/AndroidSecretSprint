@@ -16,6 +16,7 @@ import java.io.InputStream
 
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private lateinit var binding: FragmentRecipeBinding
+    private lateinit var seekBar: SeekBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipeBinding.inflate(inflater, container, false)
@@ -27,9 +28,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
         val recipeParcelable = getRecipeFromArguments()
         setupUI(recipeParcelable)
-        initIngredientsRecycler(recipeParcelable)
-        initMethodRecycler(recipeParcelable)
-        setupSeekbar(recipeParcelable)
+        initRecycler(recipeParcelable)
     }
 
     private fun getRecipeFromArguments(): Recipe? {
@@ -49,7 +48,19 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
     }
 
-    private fun initIngredientsRecycler(recipe: Recipe?) {
+    private fun initRecycler(recipe: Recipe?) {
+        val ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
+        val seekBarListener = IngredientsCountChooseSeekbar(
+            onProgressChanged = { seekBar, progress, fromUser ->
+                binding.tvPortionsCount.text = progress.toString()
+                ingredientsAdapter?.updateIngredients(progress)
+            },
+        )
+        seekBar = binding.sbPortionsCount
+        seekBar.setOnSeekBarChangeListener(seekBarListener)
+        binding.rvIngredients.adapter = ingredientsAdapter
+        seekBar.min = 1
+
         recipe?.ingredients?.let { ingredients ->
             binding.rvIngredients.apply {
                 adapter = IngredientsAdapter(ingredients)
@@ -57,9 +68,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
                 addItemDecoration(createCustomDivider())
             }
         }
-    }
 
-    private fun initMethodRecycler(recipe: Recipe?) {
         recipe?.method?.let { method ->
             binding.rvMethod.apply {
                 adapter = MethodAdapter(method)
@@ -75,22 +84,5 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
         dividerItemDecoration?.setLastItemDecorated(false)
         return dividerItemDecoration!!
-    }
-
-    private fun setupSeekbar(recipe: Recipe?) {
-        binding.sbPortionsCount.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                // Обработать изменение ползунка
-                recipe?.ingredients?.let { IngredientsAdapter(it).updateIngredients(progress) }
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                // Обработать начало взаимодействия с ползунком
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                // Обработать окончание взаимодействия с ползунком
-            }
-        })
     }
 }

@@ -42,7 +42,7 @@ class IngredientsAdapter(
         }
 
         try {
-            viewHolder.ingredientName.text = ingredientName.text
+                viewHolder.ingredientName.text = ingredientName.text
             viewHolder.ingredientCount.text = displayQuantity
             viewHolder.ingredientMeasure.text = ingredientMeasure.text
             viewHolder.ingredientName.setTextColor(
@@ -65,7 +65,7 @@ class IngredientsAdapter(
             )
             ingredientName.text = dataSet[position].description
 
-            ingredientCount.text = "${displayQuantity} "
+            ingredientCount.text = "$displayQuantity "
             ingredientMeasure.text = dataSet[position].unitOfMeasure
 
         } catch (e: Exception) {
@@ -79,6 +79,7 @@ class IngredientsAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateIngredients(progress: Int) {
+        Log.d("IngredientsAdapter", "Updating ingredients with progress: $progress")
         quantity = progress
         notifyDataSetChanged()
     }

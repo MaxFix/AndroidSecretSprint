@@ -17,6 +17,7 @@ import java.io.InputStream
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private lateinit var binding: FragmentRecipeBinding
     private lateinit var seekBar: SeekBar
+    private var ingredientsAdapter: IngredientsAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipeBinding.inflate(inflater, container, false)
@@ -49,9 +50,11 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     }
 
     private fun initRecycler(recipe: Recipe?) {
-        val ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
+        ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
+
+
         val seekBarListener = IngredientsCountChooseSeekbar(
-            onProgressChanged = { seekBar, progress, fromUser ->
+            onProgressChanged = { _, progress, _ ->
                 binding.tvPortionsCount.text = progress.toString()
                 ingredientsAdapter?.updateIngredients(progress)
             },
@@ -61,12 +64,10 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         binding.rvIngredients.adapter = ingredientsAdapter
         seekBar.min = 1
 
-        recipe?.ingredients?.let { ingredients ->
-            binding.rvIngredients.apply {
-                adapter = IngredientsAdapter(ingredients)
-                layoutManager = LinearLayoutManager(context)
-                addItemDecoration(createCustomDivider())
-            }
+        binding.rvIngredients.apply {
+            adapter = ingredientsAdapter
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(createCustomDivider())
         }
 
         recipe?.method?.let { method ->

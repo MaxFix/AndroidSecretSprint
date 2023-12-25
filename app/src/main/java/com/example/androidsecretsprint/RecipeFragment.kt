@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -52,6 +53,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
 
         val favoritesButton: ImageButton = binding.ibFavorites
+        val rippleDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ripple_effect)
         var isImageFirst = true
         favoritesButton.setImageResource(R.drawable.ic_heart_empty)
         favoritesButton.background = null
@@ -59,8 +61,10 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         favoritesButton.setOnClickListener {
             if (isImageFirst) {
                 favoritesButton.setImageResource(R.drawable.ic_heart)
+                favoritesButton.background = rippleDrawable
             } else {
                 favoritesButton.setImageResource(R.drawable.ic_heart_empty)
+                favoritesButton.background = rippleDrawable
             }
             isImageFirst = !isImageFirst
         }

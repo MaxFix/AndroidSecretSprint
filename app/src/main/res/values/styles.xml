@@ -41,7 +41,7 @@
         <item name="cornerRadius">8dp</item>
     </style>
 
-    <style name="StyleIngredientsTitle20" parent="Widget.Material3.Button">
+    <style name="StyleIngredientsTitle20">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>

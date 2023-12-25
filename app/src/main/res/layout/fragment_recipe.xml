@@ -90,7 +90,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ingredient_padding_half"
-                    android:paddingHorizontal="0dp"
                     android:min="1"
                     android:max="5"
                     app:layout_constraintBottom_toBottomOf="parent"

@@ -54,7 +54,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
 
         val seekBarListener = IngredientsCountChooseSeekbar(
-            onProgressChanged = { _, progress, _ ->
+            onProgressChanged = { progress ->
                 binding.tvPortionsCount.text = progress.toString()
                 ingredientsAdapter?.updateIngredients(progress)
             },
@@ -62,7 +62,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         seekBar = binding.sbPortionsCount
         seekBar.setOnSeekBarChangeListener(seekBarListener)
         binding.rvIngredients.adapter = ingredientsAdapter
-        seekBar.min = 1
 
         binding.rvIngredients.apply {
             adapter = ingredientsAdapter

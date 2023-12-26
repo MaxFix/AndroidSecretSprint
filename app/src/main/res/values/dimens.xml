@@ -3,4 +3,5 @@
     <dimen name="main_padding">16dp</dimen>
     <dimen name="main_padding_half">8dp</dimen>
     <dimen name="ingredient_padding">12dp</dimen>
+    <dimen name="ingredient_padding_half">6dp</dimen>
 </resources>

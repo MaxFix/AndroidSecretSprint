@@ -13,6 +13,7 @@ class IngredientsAdapter(
     private val dataSet: List<Ingredient>,
 ) :
     RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+    private var quantity = 1
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ingredientName: TextView = view.findViewById(R.id.tvRecipeIngredientName)
@@ -28,14 +29,21 @@ class IngredientsAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val ingredientCurrentCount = dataSet[position].quantity
 
         val ingredientName = viewHolder.ingredientName
         val ingredientCount = viewHolder.ingredientCount
         val ingredientMeasure = viewHolder.ingredientMeasure
+        val totalQuantity = ingredientCurrentCount.toFloat() * quantity
+        val displayQuantity = if ((totalQuantity % 1) == 0f) {
+            totalQuantity.toInt().toString() // Убираем ненужные десятичные знаки, если число целое
+        } else {
+            String.format("%.1f", totalQuantity) // Форматируем вывод одного десятичного знака
+        }
 
         try {
-            viewHolder.ingredientName.text = ingredientName.text
-            viewHolder.ingredientCount.text = ingredientCount.text
+                viewHolder.ingredientName.text = ingredientName.text
+            viewHolder.ingredientCount.text = displayQuantity
             viewHolder.ingredientMeasure.text = ingredientMeasure.text
             viewHolder.ingredientName.setTextColor(
                 ContextCompat.getColor(
@@ -56,7 +64,8 @@ class IngredientsAdapter(
                 )
             )
             ingredientName.text = dataSet[position].description
-            ingredientCount.text = "${dataSet[position].quantity} "
+
+            ingredientCount.text = "$displayQuantity "
             ingredientMeasure.text = dataSet[position].unitOfMeasure
 
         } catch (e: Exception) {
@@ -68,4 +77,10 @@ class IngredientsAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateIngredients(progress: Int) {
+        Log.d("IngredientsAdapter", "Updating ingredients with progress: $progress")
+        quantity = progress
+        notifyDataSetChanged()
+    }
 }

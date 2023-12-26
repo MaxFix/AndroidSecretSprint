@@ -87,6 +87,7 @@
 
                 <androidx.appcompat.widget.AppCompatSeekBar
                     android:id="@+id/sbPortionsCount"
+                    style="@style/styleSeekBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ingredient_padding_half"

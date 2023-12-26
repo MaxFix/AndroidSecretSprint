@@ -53,18 +53,15 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
 
         val favoritesButton: ImageButton = binding.ibFavorites
-        val rippleDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ripple_effect)
         var isImageFirst = true
-        favoritesButton.setImageResource(R.drawable.ic_heart_empty)
-        favoritesButton.background = null
+        favoritesButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_empty)
+
 
         favoritesButton.setOnClickListener {
             if (isImageFirst) {
-                favoritesButton.setImageResource(R.drawable.ic_heart)
-                favoritesButton.background = rippleDrawable
+                favoritesButton.setBackgroundResource(R.drawable.ic_heart)
             } else {
-                favoritesButton.setImageResource(R.drawable.ic_heart_empty)
-                favoritesButton.background = rippleDrawable
+                favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
             }
             isImageFirst = !isImageFirst
         }

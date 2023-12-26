@@ -60,7 +60,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             },
         )
         seekBar = binding.sbPortionsCount
-        seekBar.setPadding(0, 0, 0, 0)
+        seekBar.setPadding(16, 0, 16, 0)
         seekBar.setOnSeekBarChangeListener(seekBarListener)
         binding.rvIngredients.adapter = ingredientsAdapter
 

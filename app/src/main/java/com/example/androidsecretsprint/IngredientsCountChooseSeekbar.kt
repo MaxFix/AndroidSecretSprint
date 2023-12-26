@@ -3,10 +3,10 @@ package com.example.androidsecretsprint
 import android.widget.SeekBar
 
 class IngredientsCountChooseSeekbar(
-    private val onProgressChanged: ((SeekBar?, Int, Boolean) -> Unit)? = null,
+    private val onProgressChanged: (Int) -> Unit
 ) : SeekBar.OnSeekBarChangeListener {
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-        onProgressChanged?.invoke(seekBar, progress, fromUser)
+        onProgressChanged.invoke(progress)
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {

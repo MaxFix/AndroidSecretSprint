@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,11 +48,23 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             val drawable = Drawable.createFromStream(inputStream, null)
             binding.ivRecipeHeaderImg.setImageDrawable(drawable)
         }
+
+        val favoritesButton: ImageButton = binding.ibFavorites
+        var isImageFirst = true
+        favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
+
+        favoritesButton.setOnClickListener {
+            if (isImageFirst) {
+                favoritesButton.setBackgroundResource(R.drawable.ic_heart)
+            } else {
+                favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
+            }
+            isImageFirst = !isImageFirst
+        }
     }
 
     private fun initRecycler(recipe: Recipe?) {
         ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
-
 
         val seekBarListener = IngredientsCountChooseSeekbar(
             onProgressChanged = { progress ->

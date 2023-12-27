@@ -36,8 +36,9 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     }
 
     fun openRecipesByCategoryId(categoryId: Int) {
-        val categoryName: String = STUB.getCategories()[categoryId].title
-        val categoryImageUrl: String = STUB.getCategories()[categoryId].imageUrl
+        val categories = STUB.getCategories().firstOrNull { it.id == categoryId }
+        val categoryName: String? = categories?.title
+        val categoryImageUrl: String? = categories?.imageUrl
         val bundle = bundleOf(
             Constants.ARG_CATEGORY_ID to categoryId,
             Constants.ARG_CATEGORY_NAME to categoryName,

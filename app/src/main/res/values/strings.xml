@@ -9,4 +9,5 @@
     <string name="title_ingridients">ингредиенты</string>
     <string name="title_method">способ приготовления</string>
     <string name="subtitle_portions">Порции:</string>
+    <string name="default_portions_count">1</string>
 </resources>

@@ -65,7 +65,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     private fun initRecycler(recipe: Recipe?) {
         ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
-        binding.tvPortionsCount.text = "1"
 
         val seekBarListener = IngredientsCountChooseSeekbar(
             onProgressChanged = { progress ->

@@ -93,6 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/ingredient_padding_half"
+                    android:text="@string/default_portions_count"
                     app:layout_constraintBottom_toBottomOf="@+id/tvPortionsSubtitle"
                     app:layout_constraintStart_toEndOf="@+id/tvPortionsSubtitle"
                     app:layout_constraintTop_toTopOf="@+id/tvPortionsSubtitle"

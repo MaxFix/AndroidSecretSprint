@@ -44,7 +44,6 @@
             android:focusable="true"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:background="@drawable/ripple_effect"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/ic_heart_empty" />

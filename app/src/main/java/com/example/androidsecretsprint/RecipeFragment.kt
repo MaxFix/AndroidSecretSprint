@@ -1,6 +1,5 @@
 package com.example.androidsecretsprint
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -42,7 +41,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     private fun setupUI(recipe: Recipe?) {
         recipe?.let {
             binding.tvRecipeHeaderText.text = it.title
@@ -67,7 +65,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     private fun initRecycler(recipe: Recipe?) {
         ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
-
+        binding.tvPortionsCount.text = "1"
 
         val seekBarListener = IngredientsCountChooseSeekbar(
             onProgressChanged = { progress ->

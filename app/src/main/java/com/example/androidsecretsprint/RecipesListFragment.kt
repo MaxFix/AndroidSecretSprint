@@ -1,6 +1,5 @@
 package com.example.androidsecretsprint
 
-import STUB_RECIPES
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -58,10 +57,11 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     }
 
     private fun initRecycler() {
-        val recipesListAdapter = RecipesListAdapter(STUB_RECIPES.burgerRecipes, fragment = this)
+        val recipesListAdapter = arguments?.getInt(ARG_CATEGORY_ID)
+            ?.let { STUB.getRecipesByCategoryId(it) }?.let { RecipesListAdapter(it, fragment = this) }
         val recyclerView = binding.rvRecipes
         recyclerView.adapter = recipesListAdapter
-        recipesListAdapter.setOnItemClickListener(object : RecipesListAdapter.OnItemClickListener {
+        recipesListAdapter?.setOnItemClickListener(object : RecipesListAdapter.OnItemClickListener {
             override fun onItemClick(recipeId: Int) {
                 openRecipeByRecipeId(recipeId)
             }
@@ -70,7 +70,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     }
 
     fun openRecipeByRecipeId(recipeId: Int) {
-        val recipe = STUB_RECIPES.burgerRecipes[recipeId]
+        val recipe = STUB.getRecipeById(recipeId) //burgerRecipes[recipeId]
         val bundle = bundleOf(
             ARG_RECIPE_ID to recipeId,
             ARG_RECIPE_NAME to recipeTitle,

@@ -59,7 +59,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
             favoritesButton.setOnClickListener {
                 if (isFavorite) {
-                    removeFavorites(it.id.toString())
+                    removeFavorite(it.id.toString())
                     favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
                 } else {
                     saveFavorite(it.id.toString())
@@ -126,7 +126,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         saveFavorites(favorites)
     }
 
-    private fun removeFavorites(recipeId: String) {
+    private fun removeFavorite(recipeId: String) {
         val favorites = getFavorites().apply { remove(recipeId) }
         saveFavorites(favorites)
     }

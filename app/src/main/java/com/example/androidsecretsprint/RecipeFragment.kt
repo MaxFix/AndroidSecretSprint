@@ -50,7 +50,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             binding.ivRecipeHeaderImg.setImageDrawable(drawable)
 
             val favoritesSet = getFavorites()
-            val isFavorite = favoritesSet.contains(id.toString())
+            val isFavorite = favoritesSet.contains(recipe.id.toString())
 
             val favoriteIconRes = if (isFavorite) R.drawable.ic_heart else R.drawable.ic_heart_empty
 
@@ -58,10 +58,10 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             favoritesButton.setBackgroundResource(favoriteIconRes)
             favoritesButton.setOnClickListener {
                 if (isFavorite) {
-                    saveFavorites(getFavorites().apply { remove(id.toString()) })
+                    saveFavorites(getFavorites().apply { remove(recipe.id.toString()) })
                     favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
                 } else {
-                    saveFavorites(getFavorites().apply { add(id.toString()) })
+                    saveFavorites(getFavorites().apply { add(recipe.id.toString()) })
                     favoritesButton.setBackgroundResource(R.drawable.ic_heart)
                 }
             }

@@ -50,7 +50,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             binding.ivRecipeHeaderImg.setImageDrawable(drawable)
 
             val favoritesSet = getFavorites()
-            val isFavorite = favoritesSet.contains(it.toString())
+            val isFavorite = favoritesSet.contains(id.toString())
 
             val favoriteIconRes = if (isFavorite) R.drawable.ic_heart else R.drawable.ic_heart_empty
             binding.ibFavorites.setBackgroundResource(favoriteIconRes)
@@ -59,10 +59,10 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
             favoritesButton.setOnClickListener {
                 if (isFavorite) {
-                    removeFavorite(it.id.toString())
+                    removeFavorite(id.toString())
                     favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
                 } else {
-                    saveFavorite(it.id.toString())
+                    saveFavorite(id.toString())
                     favoritesButton.setBackgroundResource(R.drawable.ic_heart)
                 }
             }
@@ -107,10 +107,13 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     }
 
     private fun saveFavorites(recipesIds: Set<String>) {
-        val sharedPrefs = activity?.getSharedPreferences(Constants.SHARED_PREFS_RECIPES, Context.MODE_PRIVATE) ?: return
-        val editor = sharedPrefs.edit()
-        editor.putStringSet(Constants.SHARED_PREFS_RECIPES_DATA, recipesIds)
-        editor.apply()
+        val sharedPrefs =
+            requireContext().getSharedPreferences(Constants.SHARED_PREFS_RECIPES, Context.MODE_PRIVATE) ?: return
+        with(sharedPrefs) {
+            edit()
+                .putStringSet(Constants.SHARED_PREFS_RECIPES_DATA, recipesIds)
+                .apply()
+        }
     }
 
     private fun getFavorites(): MutableSet<String> {

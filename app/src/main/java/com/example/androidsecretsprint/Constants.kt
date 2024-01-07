@@ -11,5 +11,8 @@ class Constants {
         const val ARG_RECIPE_IMAGE_URL = "arg_recipe_image_url"
 
         const val ARG_RECIPE = "arg_recipe"
+
+        const val SHARED_PREFS_RECIPES = "shared_prefs_recipe"
+        const val SHARED_PREFS_RECIPES_DATA = "shared_prefs_recipe_data"
     }
 }

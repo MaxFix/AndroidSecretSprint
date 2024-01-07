@@ -116,7 +116,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
     }
 
-    private fun getFavorites(): MutableSet<String> {
+    fun getFavorites(): MutableSet<String> {
         val sharedPrefs = activity?.getSharedPreferences(Constants.SHARED_PREFS_RECIPES, Context.MODE_PRIVATE) //old set
         val favoritesRecipe = sharedPrefs?.getStringSet(Constants.SHARED_PREFS_RECIPES_DATA, null)
         return favoritesRecipe?.let { HashSet(it) } ?: hashSetOf()

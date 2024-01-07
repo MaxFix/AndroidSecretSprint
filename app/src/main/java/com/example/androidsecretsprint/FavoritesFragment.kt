@@ -1,5 +1,6 @@
 package com.example.androidsecretsprint
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,9 +61,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         recyclerView.adapter = favoritesListAdapter
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun initUI() {
-        val inputStream: InputStream? = recipeImageUrl?.let { this.context?.assets?.open(it) }
-        val drawable = Drawable.createFromStream(inputStream, null)
+        val drawable: Drawable? = this.context?.getDrawable(R.drawable.bcg_favorites)
         binding.favoriteRecipesHeaderImg.setImageDrawable(drawable)
         binding.favoritesRecipesHeaderText.text = recipeTitle
     }

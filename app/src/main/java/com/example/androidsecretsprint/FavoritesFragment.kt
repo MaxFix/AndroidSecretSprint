@@ -42,7 +42,14 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     private fun initRecycler() {
         val favoriteRecipeIdsStringSet = getFavorites()
-        favoriteRecipeIdsStringSet.size
+        if (favoriteRecipeIdsStringSet.isEmpty()) {
+            binding.tvNoData.visibility = View.VISIBLE
+            binding.rvFavoriteRecipes.visibility = View.GONE
+        } else {
+            binding.tvNoData.visibility = View.GONE
+            binding.rvFavoriteRecipes.visibility = View.VISIBLE
+        }
+
         val favoriteRecipeIds = favoriteRecipeIdsStringSet.mapNotNull { idString ->
             idString.toIntOrNull()
         }.toSet()

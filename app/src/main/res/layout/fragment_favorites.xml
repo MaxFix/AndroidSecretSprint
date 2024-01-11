@@ -19,7 +19,8 @@
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/title_favorites" />
 
         <TextView
             android:id="@+id/favoritesRecipesHeaderText"
@@ -30,7 +31,8 @@
             android:layout_marginBottom="@dimen/main_padding"
             android:background="@drawable/shape_header_rounded_corners"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="ИЗБРАННОЕ" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

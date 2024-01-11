@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.androidsecretsprint.databinding.FragmentFavoritesBinding
-import java.io.InputStream
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private lateinit var binding: FragmentFavoritesBinding
@@ -32,10 +31,10 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         initArgs()
         initUI()
 
-        val inputStream: InputStream? = recipeImageUrl?.let { this.context?.assets?.open(it) }
-        val drawable = Drawable.createFromStream(inputStream, null)
-        binding.favoriteRecipesHeaderImg.setImageDrawable(drawable)
-        binding.favoritesRecipesHeaderText.text = recipeTitle
+//        val inputStream: InputStream? = recipeImageUrl?.let { this.context?.assets?.open(it) }
+//        val drawable = Drawable.createFromStream(inputStream, null)
+        //binding.favoriteRecipesHeaderImg.setImageDrawable(drawable)
+
     }
 
     private fun initArgs() {
@@ -65,7 +64,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private fun initUI() {
         val drawable: Drawable? = this.context?.getDrawable(R.drawable.bcg_favorites)
         binding.favoriteRecipesHeaderImg.setImageDrawable(drawable)
-        binding.favoritesRecipesHeaderText.text = recipeTitle
+        binding.favoritesRecipesHeaderText.text = getString(R.string.title_favorites)
     }
 
     fun openRecipeByRecipeId(recipeId: Int) {

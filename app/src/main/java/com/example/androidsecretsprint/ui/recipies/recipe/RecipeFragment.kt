@@ -1,4 +1,4 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.ui.recipies.recipe
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -12,8 +12,11 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE
+import com.example.androidsecretsprint.R
+import com.example.androidsecretsprint.data.Constants
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
+import com.example.androidsecretsprint.model.Recipe
 import java.io.InputStream
 
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {

@@ -1,4 +1,4 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.ui.recipies.recipe
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidsecretsprint.R
+import com.example.androidsecretsprint.model.Ingredient
 
 class IngredientsAdapter(
     private val dataSet: List<Ingredient>,

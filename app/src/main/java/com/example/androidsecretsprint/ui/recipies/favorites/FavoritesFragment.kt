@@ -1,4 +1,4 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.ui.recipies.favorites
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.androidsecretsprint.R
+import com.example.androidsecretsprint.data.Constants
+import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.databinding.FragmentFavoritesBinding
+import com.example.androidsecretsprint.ui.recipies.recipe.RecipeFragment
+import com.example.androidsecretsprint.ui.recipies.recipiesList.RecipesListAdapter
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private lateinit var binding: FragmentFavoritesBinding

@@ -1,4 +1,8 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.data
+
+import com.example.androidsecretsprint.model.Category
+import com.example.androidsecretsprint.model.Ingredient
+import com.example.androidsecretsprint.model.Recipe
 
 object STUB {
 

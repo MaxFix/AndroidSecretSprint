@@ -1,10 +1,13 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.ui
 
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
+import com.example.androidsecretsprint.R
 import com.example.androidsecretsprint.databinding.ActivityMainBinding
+import com.example.androidsecretsprint.ui.categories.CategoriesListFragment
+import com.example.androidsecretsprint.ui.recipies.favorites.FavoritesFragment
 
 class MainActivity : AppCompatActivity() {
 

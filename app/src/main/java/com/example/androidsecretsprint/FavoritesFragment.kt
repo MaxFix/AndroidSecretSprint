@@ -35,9 +35,11 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     }
 
     private fun initArgs() {
-        recipeID = arguments?.getString(Constants.ARG_CATEGORY_ID)
-        recipeTitle = arguments?.getString(Constants.ARG_CATEGORY_NAME)
-        recipeImageUrl = arguments?.getString(Constants.ARG_CATEGORY_IMAGE_URL)
+        arguments.let {
+            recipeID = Constants.ARG_CATEGORY_ID
+            recipeTitle = Constants.ARG_CATEGORY_NAME
+            recipeImageUrl = Constants.ARG_CATEGORY_IMAGE_URL
+        }
     }
 
     private fun initRecycler() {

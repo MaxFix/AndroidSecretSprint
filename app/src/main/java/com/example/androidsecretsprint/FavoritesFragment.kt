@@ -1,12 +1,10 @@
 package com.example.androidsecretsprint
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -29,9 +27,8 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecycler()
-        initArgs()
         initUI()
+        initArgs()
     }
 
     private fun initArgs() {
@@ -42,7 +39,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         }
     }
 
-    private fun initRecycler() {
+    private fun initUI() {
         val favoriteRecipeIdsStringSet = getFavorites()
         if (favoriteRecipeIdsStringSet.isEmpty()) {
             binding.tvNoData.visibility = View.VISIBLE
@@ -67,12 +64,6 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
             adapter = favoritesListAdapter
             layoutManager = LinearLayoutManager(context)
         }
-    }
-
-    private fun initUI() {
-        val drawable: Drawable? = activity?.let { ContextCompat.getDrawable(it, R.drawable.bcg_favorites) }
-        binding.favoriteRecipesHeaderImg.setImageDrawable(drawable)
-        binding.favoritesRecipesHeaderText.text = getString(R.string.title_favorites)
     }
 
     fun openRecipeByRecipeId(recipeId: Int) {

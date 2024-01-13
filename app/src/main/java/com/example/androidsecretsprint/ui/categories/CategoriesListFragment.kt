@@ -1,4 +1,4 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.ui.categories
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.example.androidsecretsprint.R
+import com.example.androidsecretsprint.data.Constants
+import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.databinding.FragmentListCategoriesBinding
+import com.example.androidsecretsprint.ui.recipies.recipiesList.RecipesListFragment
 
 
 class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {

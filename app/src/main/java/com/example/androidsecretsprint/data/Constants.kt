@@ -1,4 +1,4 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.data
 
 class Constants {
     companion object {

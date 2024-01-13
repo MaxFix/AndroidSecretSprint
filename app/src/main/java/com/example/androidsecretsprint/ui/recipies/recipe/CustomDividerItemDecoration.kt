@@ -1,9 +1,10 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.ui.recipies.recipe
 
 import android.content.Context
 import android.graphics.Canvas
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidsecretsprint.R
 
 class CustomDividerItemDecoration(
     context: Context,

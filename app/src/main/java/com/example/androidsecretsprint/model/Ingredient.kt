@@ -1,4 +1,4 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

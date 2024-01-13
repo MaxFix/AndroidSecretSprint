@@ -1,4 +1,4 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.ui.recipies.recipiesList
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -9,14 +9,17 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_ID
-import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_IMAGE_URL
-import com.example.androidsecretsprint.Constants.Companion.ARG_CATEGORY_NAME
-import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE
-import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_ID
-import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_IMAGE_URL
-import com.example.androidsecretsprint.Constants.Companion.ARG_RECIPE_NAME
+import com.example.androidsecretsprint.R
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_CATEGORY_ID
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_CATEGORY_IMAGE_URL
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_CATEGORY_NAME
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_IMAGE_URL
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_NAME
+import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.databinding.FragmentRecipesListBinding
+import com.example.androidsecretsprint.ui.recipies.recipe.RecipeFragment
 import java.io.InputStream
 
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {

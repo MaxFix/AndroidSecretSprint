@@ -1,4 +1,4 @@
-package com.example.androidsecretsprint
+package com.example.androidsecretsprint.ui.recipies.recipe
 
 import android.widget.SeekBar
 

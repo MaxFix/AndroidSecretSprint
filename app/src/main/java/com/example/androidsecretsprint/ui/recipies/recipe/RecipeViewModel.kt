@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.androidsecretsprint.model.Recipe
 
 data class RecipeUiState(
-    val favoriteRecipe: Boolean,
-    val portionsCount: Int,
+    val favoriteRecipe: Boolean = false,
+    val portionsCount: Int = 1,
 )
 
 class RecipeViewModel(
@@ -16,5 +16,6 @@ class RecipeViewModel(
     val favoriteRecipe: Boolean = false,
     val portionsCount: Int? = null,
 ) : ViewModel() {
-    private val _liveData: MutableLiveData<RecipeViewModel> = MutableLiveData()
+    private val _recipeState: MutableLiveData<RecipeUiState> = MutableLiveData(RecipeUiState())
+    val recipeState: MutableLiveData<RecipeUiState> get() = _recipeState
 }

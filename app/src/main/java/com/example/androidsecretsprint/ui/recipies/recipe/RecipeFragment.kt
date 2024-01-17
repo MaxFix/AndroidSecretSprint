@@ -4,12 +4,14 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.R
@@ -23,6 +25,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private lateinit var binding: FragmentRecipeBinding
     private lateinit var seekBar: SeekBar
     private var ingredientsAdapter: IngredientsAdapter? = null
+    private val recipe: RecipeViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipeBinding.inflate(inflater, container, false)
@@ -35,6 +38,10 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         val recipeParcelable = getRecipeFromArguments()
         setupUI(recipeParcelable)
         initRecycler(recipeParcelable)
+
+        recipe.recipeState?.observe(viewLifecycleOwner) {
+            Log.i("!!!", recipe.currentFavoriteRecipe.toString())
+        }
     }
 
     private fun getRecipeFromArguments(): Recipe? {

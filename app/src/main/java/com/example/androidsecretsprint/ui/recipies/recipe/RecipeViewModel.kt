@@ -1,6 +1,7 @@
 package com.example.androidsecretsprint.ui.recipies.recipe
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,10 +18,15 @@ class RecipeViewModel(
     val favoriteRecipe: Boolean = false,
     val portionsCount: Int? = null,
 ) : ViewModel() {
-    private val _liveData: LiveData<String>? = null
+    private val _recipeState: MutableLiveData<String>? = null
 
-    val liveData: LiveData<String>?
-        get() = _liveData
+    init {
+        _recipeState?.value = RecipeUiState(favoriteRecipe = false, 12).toString()
+        Log.i("!!!", _recipeState?.value.toString())
+    }
+
+    val recipeState: LiveData<String>?
+        get() = _recipeState
 
     val currentRecipe: LiveData<Recipe> by lazy {
         MutableLiveData<Recipe>()

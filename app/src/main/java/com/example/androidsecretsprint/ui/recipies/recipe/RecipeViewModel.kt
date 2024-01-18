@@ -15,5 +15,5 @@ data class RecipeUiState(
 
 class RecipeViewModel() : ViewModel() {
     private val _recipeState = MutableLiveData<RecipeUiState>()
-    val recipeState: LiveData<RecipeUiState> = _recipeState
+    val recipeState: LiveData<RecipeUiState> get() = _recipeState
 }

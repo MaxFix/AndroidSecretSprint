@@ -40,7 +40,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         initRecycler(recipeParcelable)
 
         recipe.recipeState.observe(viewLifecycleOwner) {
-            Log.i("!!!", recipe.favoriteRecipe.toString())
+            Log.i("!!!", recipe.recipeState.toString())
         }
     }
 

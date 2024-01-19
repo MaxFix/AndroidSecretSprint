@@ -1,18 +1,19 @@
 package com.example.androidsecretsprint.ui.recipies.recipe
 
 import android.graphics.drawable.Drawable
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.androidsecretsprint.model.Recipe
 
 data class RecipeUiState(
-    val favoriteRecipe: Boolean,
-    val portionsCount: Int,
+    val recipe: Recipe? = null,
+    val portionsCount: Int = 1,
+    var isFavorite: Boolean = false,
+    val recipeDrawable: Drawable? = null,
 )
 
-class RecipeViewModel(
-    val recipe: Recipe? = null,
-    val recipeDrawable: Drawable? = null,
-    val favoriteRecipe: Boolean = false,
-    val portionsCount: Int? = null,
-    val ingredientsCount: Int? = null,
-) : ViewModel()
+class RecipeViewModel() : ViewModel() {
+    private val _recipeState = MutableLiveData<RecipeUiState>()
+    val recipeState: LiveData<RecipeUiState> get() = _recipeState
+}

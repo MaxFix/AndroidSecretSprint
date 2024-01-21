@@ -1,10 +1,8 @@
 package com.example.androidsecretsprint.ui.recipies.recipe
 
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.R
-import com.example.androidsecretsprint.data.Constants
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 import com.example.androidsecretsprint.model.Recipe
@@ -36,12 +33,9 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         super.onViewCreated(view, savedInstanceState)
 
         val recipeParcelable = getRecipeFromArguments()
+        val recipeVM = recipeParcelable?.id?.let { recipe.loadRecipe(it) }
         setupUI(recipeParcelable)
         initRecycler(recipeParcelable)
-
-        recipe.recipeState.observe(viewLifecycleOwner) {
-            Log.i("!!!", recipe.recipeState.toString())
-        }
     }
 
     private fun getRecipeFromArguments(): Recipe? {
@@ -53,29 +47,29 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     }
 
     private fun setupUI(recipe: Recipe?) {
-        recipe?.let { it ->
-            binding.tvRecipeHeaderText.text = it.title
-            val inputStream: InputStream? = it.imageUrl.let { imgUrl -> context?.assets?.open(imgUrl) }
-            val drawable = Drawable.createFromStream(inputStream, null)
-            binding.ivRecipeHeaderImg.setImageDrawable(drawable)
+        this.recipe.recipeState.observe(viewLifecycleOwner) {
+            recipe?.let { it ->
+                binding.tvRecipeHeaderText.text = it.title
+                val inputStream: InputStream? = it.imageUrl.let { imgUrl -> context?.assets?.open(imgUrl) }
+                val drawable = Drawable.createFromStream(inputStream, null)
+                binding.ivRecipeHeaderImg.setImageDrawable(drawable)
 
-            val favoritesSet = getFavorites()
-            var isFavorite = favoritesSet.contains(recipe.id.toString())
+                val isFavorite = this.recipe.recipeState.value?.isFavorite
+                val favoritesButton: ImageButton = binding.ibFavorites
 
-            val favoriteIconRes = if (isFavorite) R.drawable.ic_heart else R.drawable.ic_heart_empty
-
-            val favoritesButton: ImageButton = binding.ibFavorites
-            favoritesButton.setBackgroundResource(favoriteIconRes)
-            favoritesButton.setOnClickListener {
-                isFavorite = if (isFavorite) {
-                    saveFavorites(getFavorites().apply { remove(recipe.id.toString()) })
-                    favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
-                    false
-                } else {
-                    saveFavorites(getFavorites().apply { add(recipe.id.toString()) })
-                    favoritesButton.setBackgroundResource(R.drawable.ic_heart)
-                    true
+                favoritesButton.setOnClickListener {
+                    if (isFavorite == true) {
+                        favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
+                        this.recipe.onFavoritesClicked()
+                    } else {
+                        favoritesButton.setBackgroundResource(R.drawable.ic_heart)
+                    }
+                    this.recipe.onFavoritesClicked()
                 }
+
+                val favoriteIconRes = if (isFavorite == true) R.drawable.ic_heart else R.drawable.ic_heart_empty
+                favoritesButton.setBackgroundResource(favoriteIconRes)
+
             }
         }
     }
@@ -115,20 +109,5 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
         dividerItemDecoration?.setLastItemDecorated(false)
         return dividerItemDecoration!!
-    }
-
-    private fun saveFavorites(recipesIds: Set<String>) {
-        val sharedPrefs =
-            requireContext().getSharedPreferences(Constants.SHARED_PREFS_RECIPES, Context.MODE_PRIVATE)
-        with(sharedPrefs.edit()) {
-            putStringSet(Constants.SHARED_PREFS_RECIPES_DATA, recipesIds)
-            apply()
-        }
-    }
-
-    private fun getFavorites(): MutableSet<String> {
-        val sharedPrefs = activity?.getSharedPreferences(Constants.SHARED_PREFS_RECIPES, Context.MODE_PRIVATE) //old set
-        val favoritesRecipe = sharedPrefs?.getStringSet(Constants.SHARED_PREFS_RECIPES_DATA, null)
-        return favoritesRecipe?.let { HashSet(it) } ?: hashSetOf()
     }
 }

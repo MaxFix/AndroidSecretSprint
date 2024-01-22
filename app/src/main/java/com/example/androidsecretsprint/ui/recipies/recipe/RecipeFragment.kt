@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.R
-import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 import com.example.androidsecretsprint.model.Recipe
 import java.io.InputStream
@@ -22,7 +21,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private lateinit var binding: FragmentRecipeBinding
     private lateinit var seekBar: SeekBar
     private var ingredientsAdapter: IngredientsAdapter? = null
-    private val recipe: RecipeViewModel by viewModels()
+    private val viewModel: RecipeViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipeBinding.inflate(inflater, container, false)
@@ -33,36 +32,40 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         super.onViewCreated(view, savedInstanceState)
 
         val recipeParcelable = getRecipeFromArguments()
-        recipeParcelable?.id?.let { recipe.loadRecipe(it) }
-        setupUI(recipeParcelable)
+        setupUI()
         initRecycler(recipeParcelable)
     }
 
     private fun getRecipeFromArguments(): Recipe? {
         return if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable(ARG_RECIPE_ID, Recipe::class.java)
+            arguments?.getParcelable(viewModel.recipeState.value?.recipe?.id.toString(), Recipe::class.java)
         } else {
-            arguments?.getParcelable(ARG_RECIPE_ID)
+            arguments?.getParcelable(viewModel.recipeState.value?.recipe?.id.toString())
         }
     }
 
-    private fun setupUI(recipe: Recipe?) {
-        this.recipe.recipeState.observe(viewLifecycleOwner) {
-            recipe?.let { it ->
-                binding.tvRecipeHeaderText.text = it.title
-                val inputStream: InputStream? = it.imageUrl.let { imgUrl -> context?.assets?.open(imgUrl) }
-                val drawable = Drawable.createFromStream(inputStream, null)
-                binding.ivRecipeHeaderImg.setImageDrawable(drawable)
+    private fun setupUI() {
+        viewModel.recipeState.observe(viewLifecycleOwner) { state: RecipeUiState ->
+            val recipe: Recipe? = state.recipe
 
-                val isFavorite = this.recipe.recipeState.value?.isFavorite
-                val favoritesButton: ImageButton = binding.ibFavorites
-                val favoriteIconRes = if (isFavorite == true) R.drawable.ic_heart else R.drawable.ic_heart_empty
-                favoritesButton.setBackgroundResource(favoriteIconRes)
-
-                favoritesButton.setOnClickListener {
-                    this.recipe.onFavoritesClicked()
+            binding.tvRecipeHeaderText.text = recipe?.title
+            val inputStream: InputStream? = recipe?.imageUrl.let {
+                recipe?.imageUrl?.let {
+                    context?.assets?.open(it)
                 }
             }
+            val drawable = Drawable.createFromStream(inputStream, null)
+            binding.ivRecipeHeaderImg.setImageDrawable(drawable)
+
+            val isFavorite = this.viewModel.recipeState.value?.isFavorite
+            val favoritesButton: ImageButton = binding.ibFavorites
+            val favoriteIconRes = if (isFavorite == true) R.drawable.ic_heart else R.drawable.ic_heart_empty
+            favoritesButton.setBackgroundResource(favoriteIconRes)
+
+            favoritesButton.setOnClickListener {
+                this.viewModel.onFavoritesClicked()
+            }
+
         }
     }
 

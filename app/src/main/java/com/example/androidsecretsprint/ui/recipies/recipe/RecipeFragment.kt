@@ -37,8 +37,8 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     }
 
     private fun setupUI() {
-        viewModel.recipeState.observe(viewLifecycleOwner) { state: RecipeUiState ->
-            val recipe: Recipe? = state.recipe
+        viewModel.recipeState.observe(viewLifecycleOwner) { state: RecipeUiState? ->
+            val recipe: Recipe? = state?.recipe
 
             binding.tvRecipeHeaderText.text = recipe?.title
             val inputStream: InputStream? = recipe?.imageUrl.let {

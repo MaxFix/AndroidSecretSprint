@@ -3,7 +3,6 @@ package com.example.androidsecretsprint.ui.recipies.recipe
 import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,22 +21,17 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
     private val _recipeState = MutableLiveData<RecipeUiState>()
     val recipeState: LiveData<RecipeUiState> = _recipeState
 
-    init {
-        _recipeState.value = RecipeUiState()
-        Log.i("!!!", _recipeState.value.toString())
-    }
-
     fun loadRecipe(recipeId: Int) {
         //load from network
         val recipe = STUB.getRecipeById(recipeId)
-        _recipeState.value = _recipeState.value?.copy(
+        _recipeState.value = RecipeUiState().copy(
             recipe = recipe,
             portionsCount = recipeState.value?.portionsCount ?: 1,
             isFavorite = getFavorites().contains(recipeId.toString())
         )
     }
 
-    fun getFavorites(): MutableSet<String> {
+    private fun getFavorites(): MutableSet<String> {
         val sharedPrefs =
             application.getSharedPreferences(Constants.SHARED_PREFS_RECIPES, Context.MODE_PRIVATE) //old set
         val favoritesRecipe = sharedPrefs?.getStringSet(Constants.SHARED_PREFS_RECIPES_DATA, null)

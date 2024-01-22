@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.R
-import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 import com.example.androidsecretsprint.model.Recipe
 import java.io.InputStream
@@ -33,16 +33,16 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         super.onViewCreated(view, savedInstanceState)
 
         val recipeParcelable = getRecipeFromArguments()
-        val recipeVM = recipeParcelable?.id?.let { recipe.loadRecipe(it) }
+        recipeParcelable?.id?.let { recipe.loadRecipe(it) }
         setupUI(recipeParcelable)
         initRecycler(recipeParcelable)
     }
 
     private fun getRecipeFromArguments(): Recipe? {
         return if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable(ARG_RECIPE, Recipe::class.java)
+            arguments?.getParcelable(ARG_RECIPE_ID, Recipe::class.java)
         } else {
-            arguments?.getParcelable(ARG_RECIPE)
+            arguments?.getParcelable(ARG_RECIPE_ID)
         }
     }
 
@@ -56,20 +56,12 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
                 val isFavorite = this.recipe.recipeState.value?.isFavorite
                 val favoritesButton: ImageButton = binding.ibFavorites
-
-                favoritesButton.setOnClickListener {
-                    if (isFavorite == true) {
-                        favoritesButton.setBackgroundResource(R.drawable.ic_heart_empty)
-                        this.recipe.onFavoritesClicked()
-                    } else {
-                        favoritesButton.setBackgroundResource(R.drawable.ic_heart)
-                    }
-                    this.recipe.onFavoritesClicked()
-                }
-
                 val favoriteIconRes = if (isFavorite == true) R.drawable.ic_heart else R.drawable.ic_heart_empty
                 favoritesButton.setBackgroundResource(favoriteIconRes)
 
+                favoritesButton.setOnClickListener {
+                    this.recipe.onFavoritesClicked()
+                }
             }
         }
     }

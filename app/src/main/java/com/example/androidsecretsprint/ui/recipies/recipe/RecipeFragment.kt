@@ -1,7 +1,6 @@
 package com.example.androidsecretsprint.ui.recipies.recipe
 
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.R
+import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 import com.example.androidsecretsprint.model.Recipe
 import java.io.InputStream
@@ -30,18 +30,10 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.getInt(ARG_RECIPE_ID)?.let { viewModel.loadRecipe(it) }
 
-        val recipeParcelable = getRecipeFromArguments()
         setupUI()
-        initRecycler(recipeParcelable)
-    }
-
-    private fun getRecipeFromArguments(): Recipe? {
-        return if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable(viewModel.recipeState.value?.recipe?.id.toString(), Recipe::class.java)
-        } else {
-            arguments?.getParcelable(viewModel.recipeState.value?.recipe?.id.toString())
-        }
+        initRecycler()
     }
 
     private fun setupUI() {
@@ -69,7 +61,8 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
     }
 
-    private fun initRecycler(recipe: Recipe?) {
+    private fun initRecycler() {
+        val recipe = viewModel.recipeState.value?.recipe
         ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
 
         val seekBarListener = IngredientsCountChooseSeekbar(

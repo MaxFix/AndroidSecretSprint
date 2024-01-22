@@ -49,7 +49,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             val drawable = Drawable.createFromStream(inputStream, null)
             binding.ivRecipeHeaderImg.setImageDrawable(drawable)
 
-            val isFavorite = this.viewModel.recipeState.value?.isFavorite
+            val isFavorite = viewModel.recipeState.value?.isFavorite
             val favoritesButton: ImageButton = binding.ibFavorites
             val favoriteIconRes = if (isFavorite == true) R.drawable.ic_heart else R.drawable.ic_heart_empty
             favoritesButton.setBackgroundResource(favoriteIconRes)

@@ -51,10 +51,14 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
 
         if (isFavorite) {
             saveFavorites(favoritesSet.apply { remove(recipeId) })
-            recipeState.value?.isFavorite = false
+            _recipeState.value = _recipeState.value?.copy(
+                isFavorite = true
+            )
         } else {
             saveFavorites(favoritesSet.apply { add(recipeId) })
-            recipeState.value?.isFavorite = true
+            _recipeState.value = _recipeState.value?.copy(
+                isFavorite = false
+            )
         }
     }
 

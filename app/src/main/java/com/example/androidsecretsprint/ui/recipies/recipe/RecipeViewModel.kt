@@ -23,7 +23,7 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
     val recipeState: LiveData<RecipeUiState> = _recipeState
 
     init {
-        _recipeState.value = RecipeUiState(isFavorite = true)
+        _recipeState.value = RecipeUiState()
         Log.i("!!!", _recipeState.value.toString())
     }
 
@@ -52,12 +52,12 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
         if (isFavorite) {
             saveFavorites(favoritesSet.apply { remove(recipeId) })
             _recipeState.value = _recipeState.value?.copy(
-                isFavorite = true
+                isFavorite = false
             )
         } else {
             saveFavorites(favoritesSet.apply { add(recipeId) })
             _recipeState.value = _recipeState.value?.copy(
-                isFavorite = false
+                isFavorite = true
             )
         }
     }

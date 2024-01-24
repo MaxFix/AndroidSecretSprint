@@ -33,7 +33,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         arguments?.getInt(ARG_RECIPE_ID)?.let { viewModel.loadRecipe(it) }
 
         setupUI()
-        initRecycler()
     }
 
     private fun setupUI() {
@@ -49,7 +48,9 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             val drawable = Drawable.createFromStream(inputStream, null)
             binding.ivRecipeHeaderImg.setImageDrawable(drawable)
 
-            val isFavorite = viewModel.recipeState.value?.isFavorite
+
+            val isFavorite = state?.isFavorite
+
             val favoritesButton: ImageButton = binding.ibFavorites
             val favoriteIconRes = if (isFavorite == true) R.drawable.ic_heart else R.drawable.ic_heart_empty
             favoritesButton.setBackgroundResource(favoriteIconRes)
@@ -59,6 +60,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             }
 
         }
+        initRecycler()
     }
 
     private fun initRecycler() {

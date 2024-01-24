@@ -58,13 +58,11 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             favoritesButton.setOnClickListener {
                 this.viewModel.onFavoritesClicked()
             }
-
+            initRecycler(recipe)
         }
-        initRecycler()
     }
 
-    private fun initRecycler() {
-        val recipe = viewModel.recipeState.value?.recipe
+    private fun initRecycler(recipe: Recipe?) {
         ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
 
         val seekBarListener = IngredientsCountChooseSeekbar(

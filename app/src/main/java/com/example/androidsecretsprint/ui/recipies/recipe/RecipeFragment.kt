@@ -22,6 +22,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private lateinit var seekBar: SeekBar
     private var ingredientsAdapter: IngredientsAdapter? = null
     private val viewModel: RecipeViewModel by viewModels()
+    //private var customDividerItemDecoration = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipeBinding.inflate(inflater, container, false)
@@ -36,6 +37,9 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     }
 
     private fun setupUI() {
+        val customDividerItemDecoration = createCustomDivider()
+        binding.rvIngredients.addItemDecoration(customDividerItemDecoration)
+        binding.rvMethod.addItemDecoration(customDividerItemDecoration)
         viewModel.recipeState.observe(viewLifecycleOwner) { state: RecipeUiState? ->
             val recipe: Recipe? = state?.recipe
 
@@ -79,14 +83,12 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         binding.rvIngredients.apply {
             adapter = ingredientsAdapter
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(createCustomDivider())
         }
 
         recipe?.method?.let { method ->
             binding.rvMethod.apply {
                 adapter = MethodAdapter(method)
                 layoutManager = LinearLayoutManager(context)
-                addItemDecoration(createCustomDivider())
             }
         }
     }

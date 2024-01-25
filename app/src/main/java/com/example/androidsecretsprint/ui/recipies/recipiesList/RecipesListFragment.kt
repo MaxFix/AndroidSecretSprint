@@ -15,8 +15,6 @@ import com.example.androidsecretsprint.data.Constants.Companion.ARG_CATEGORY_IMA
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_CATEGORY_NAME
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
-import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_IMAGE_URL
-import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_NAME
 import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.databinding.FragmentRecipesListBinding
 import com.example.androidsecretsprint.ui.recipies.recipe.RecipeFragment
@@ -76,8 +74,6 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         val recipe = STUB.getRecipeById(recipeId) //burgerRecipes[recipeId]
         val bundle = bundleOf(
             ARG_RECIPE_ID to recipeId,
-            ARG_RECIPE_NAME to recipeTitle,
-            ARG_RECIPE_IMAGE_URL to recipeImageUrl
         )
 
         bundle.putParcelable(ARG_RECIPE, recipe)

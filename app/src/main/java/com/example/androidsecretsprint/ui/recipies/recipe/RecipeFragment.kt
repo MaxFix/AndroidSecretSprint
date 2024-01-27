@@ -54,34 +54,62 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
                 this.viewModel.onFavoritesClicked()
             }
             initRecycler(recipe)
+
+            ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
+
+            val seekBarListener = IngredientsCountChooseSeekbar(
+                onProgressChanged = { portionsCount ->
+                    portionsCount.let {
+                        binding.tvPortionsCount.text = it.toString()
+                        ingredientsAdapter?.updateIngredients(it)
+                    }
+                    viewModel.updatePortionsCountState(portionsCount)
+                }
+            )
+            seekBar = binding.sbPortionsCount
+            seekBar.setPadding(16, 0, 16, 0)
+            seekBar.setOnSeekBarChangeListener(seekBarListener)
+            binding.rvIngredients.adapter = ingredientsAdapter
+
+            binding.rvIngredients.apply {
+                adapter = ingredientsAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
+
+            recipe?.method?.let { method ->
+                binding.rvMethod.apply {
+                    adapter = MethodAdapter(method)
+                    layoutManager = LinearLayoutManager(context)
+                }
+            }
         }
     }
 
     private fun initRecycler(recipe: Recipe?) {
-        ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
-
-        val seekBarListener = IngredientsCountChooseSeekbar(
-            onProgressChanged = { progress ->
-                binding.tvPortionsCount.text = progress.toString()
-                ingredientsAdapter?.updateIngredients(progress)
-            },
-        )
-        seekBar = binding.sbPortionsCount
-        seekBar.setPadding(16, 0, 16, 0)
-        seekBar.setOnSeekBarChangeListener(seekBarListener)
-        binding.rvIngredients.adapter = ingredientsAdapter
-
-        binding.rvIngredients.apply {
-            adapter = ingredientsAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-
-        recipe?.method?.let { method ->
-            binding.rvMethod.apply {
-                adapter = MethodAdapter(method)
-                layoutManager = LinearLayoutManager(context)
-            }
-        }
+//        ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
+//
+//        val seekBarListener = IngredientsCountChooseSeekbar(
+//            onProgressChanged = { progress ->
+//                binding.tvPortionsCount.text = progress.toString()
+//                ingredientsAdapter?.updateIngredients(progress)
+//            },
+//        )
+//        seekBar = binding.sbPortionsCount
+//        seekBar.setPadding(16, 0, 16, 0)
+//        seekBar.setOnSeekBarChangeListener(seekBarListener)
+//        binding.rvIngredients.adapter = ingredientsAdapter
+//
+//        binding.rvIngredients.apply {
+//            adapter = ingredientsAdapter
+//            layoutManager = LinearLayoutManager(context)
+//        }
+//
+//        recipe?.method?.let { method ->
+//            binding.rvMethod.apply {
+//                adapter = MethodAdapter(method)
+//                layoutManager = LinearLayoutManager(context)
+//            }
+//        }
     }
 
     private fun createCustomDivider(): CustomDividerItemDecoration {

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.androidsecretsprint.data.Constants
 import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.model.Recipe
+import java.io.InputStream
 
 data class RecipeUiState(
     var recipe: Recipe? = null,
@@ -24,10 +25,14 @@ class RecipeViewModel(private val application: Application) : AndroidViewModel(a
     fun loadRecipe(recipeId: Int) {
         //load from network
         val recipe = STUB.getRecipeById(recipeId)
+        val inputStream: InputStream?
+        inputStream = application.assets.open(recipe.imageUrl)
+        val drawable = Drawable.createFromStream(inputStream, null)
         _recipeState.value = RecipeUiState().copy(
             recipe = recipe,
             portionsCount = recipeState.value?.portionsCount ?: 1,
-            isFavorite = getFavorites().contains(recipeId.toString())
+            isFavorite = getFavorites().contains(recipeId.toString()),
+            recipeDrawable = drawable
         )
     }
 

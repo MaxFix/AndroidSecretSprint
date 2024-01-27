@@ -1,6 +1,5 @@
 package com.example.androidsecretsprint.ui.recipies.recipe
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,6 @@ import com.example.androidsecretsprint.R
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
 import com.example.androidsecretsprint.model.Recipe
-import java.io.InputStream
 
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private lateinit var binding: FragmentRecipeBinding
@@ -44,14 +42,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             val recipe: Recipe? = state?.recipe
 
             binding.tvRecipeHeaderText.text = recipe?.title
-            val inputStream: InputStream? = recipe?.imageUrl.let {
-                recipe?.imageUrl?.let {
-                    context?.assets?.open(it)
-                }
-            }
-            val drawable = Drawable.createFromStream(inputStream, null)
-            binding.ivRecipeHeaderImg.setImageDrawable(drawable)
-
+            binding.ivRecipeHeaderImg.setImageDrawable(state?.recipeDrawable)
 
             val isFavorite = state?.isFavorite
 

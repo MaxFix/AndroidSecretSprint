@@ -53,7 +53,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             favoritesButton.setOnClickListener {
                 this.viewModel.onFavoritesClicked()
             }
-            initRecycler(recipe)
 
             ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
 

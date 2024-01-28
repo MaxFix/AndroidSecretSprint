@@ -55,14 +55,12 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             }
 
             ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
+            binding.tvPortionsCount.text = state?.portionsCount.toString()
+            state?.portionsCount?.let { ingredientsAdapter?.updateIngredients(it) }
 
             val seekBarListener = IngredientsCountChooseSeekbar(
-                onProgressChanged = { portionsCount ->
-                    portionsCount.let {
-                        binding.tvPortionsCount.text = it.toString()
-                        ingredientsAdapter?.updateIngredients(it)
-                    }
-                    viewModel.updatePortionsCountState(portionsCount)
+                onProgressChanged = { progress ->
+                    viewModel.updatePortionsCountState(progress)
                 }
             )
             seekBar = binding.sbPortionsCount

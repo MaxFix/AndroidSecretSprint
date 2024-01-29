@@ -53,33 +53,31 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             favoritesButton.setOnClickListener {
                 this.viewModel.onFavoritesClicked()
             }
-            initRecycler(recipe)
-        }
-    }
 
-    private fun initRecycler(recipe: Recipe?) {
-        ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
+            ingredientsAdapter = recipe?.ingredients?.let { IngredientsAdapter(it) }
+            binding.tvPortionsCount.text = state?.portionsCount.toString()
+            state?.portionsCount?.let { ingredientsAdapter?.updateIngredients(it) }
 
-        val seekBarListener = IngredientsCountChooseSeekbar(
-            onProgressChanged = { progress ->
-                binding.tvPortionsCount.text = progress.toString()
-                ingredientsAdapter?.updateIngredients(progress)
-            },
-        )
-        seekBar = binding.sbPortionsCount
-        seekBar.setPadding(16, 0, 16, 0)
-        seekBar.setOnSeekBarChangeListener(seekBarListener)
-        binding.rvIngredients.adapter = ingredientsAdapter
+            val seekBarListener = IngredientsCountChooseSeekbar(
+                onProgressChanged = { progress ->
+                    viewModel.updatePortionsCountState(progress)
+                }
+            )
+            seekBar = binding.sbPortionsCount
+            seekBar.setPadding(16, 0, 16, 0)
+            seekBar.setOnSeekBarChangeListener(seekBarListener)
+            binding.rvIngredients.adapter = ingredientsAdapter
 
-        binding.rvIngredients.apply {
-            adapter = ingredientsAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-
-        recipe?.method?.let { method ->
-            binding.rvMethod.apply {
-                adapter = MethodAdapter(method)
+            binding.rvIngredients.apply {
+                adapter = ingredientsAdapter
                 layoutManager = LinearLayoutManager(context)
+            }
+
+            recipe?.method?.let { method ->
+                binding.rvMethod.apply {
+                    adapter = MethodAdapter(method)
+                    layoutManager = LinearLayoutManager(context)
+                }
             }
         }
     }

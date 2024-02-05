@@ -19,8 +19,8 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private lateinit var binding: FragmentRecipeBinding
     private lateinit var seekBar: SeekBar
     private var ingredientsAdapter: IngredientsAdapter? = null
+    private var methodAdapter: MethodAdapter? = null
     private val viewModel: RecipeViewModel by viewModels()
-    //private var customDividerItemDecoration = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRecipeBinding.inflate(inflater, container, false)
@@ -38,6 +38,9 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         val customDividerItemDecoration = createCustomDivider()
         binding.rvIngredients.addItemDecoration(customDividerItemDecoration)
         binding.rvMethod.addItemDecoration(customDividerItemDecoration)
+        ingredientsAdapter = IngredientsAdapter(listOf())
+        methodAdapter = MethodAdapter(listOf())
+
         viewModel.recipeState.observe(viewLifecycleOwner) { state: RecipeUiState? ->
             val recipe: Recipe? = state?.recipe
 
@@ -58,26 +61,25 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             binding.tvPortionsCount.text = state?.portionsCount.toString()
             state?.portionsCount?.let { ingredientsAdapter?.updateIngredients(it) }
 
-            val seekBarListener = IngredientsCountChooseSeekbar(
-                onProgressChanged = { progress ->
-                    viewModel.updatePortionsCountState(progress)
-                }
-            )
+            val seekBarListener = IngredientsCountChooseSeekbar { progress ->
+                viewModel.updatePortionsCountState(progress)
+            }
+
             seekBar = binding.sbPortionsCount
             seekBar.setPadding(16, 0, 16, 0)
             seekBar.setOnSeekBarChangeListener(seekBarListener)
             binding.rvIngredients.adapter = ingredientsAdapter
+            binding.rvMethod.adapter = methodAdapter
 
             binding.rvIngredients.apply {
                 adapter = ingredientsAdapter
                 layoutManager = LinearLayoutManager(context)
             }
 
-            recipe?.method?.let { method ->
-                binding.rvMethod.apply {
-                    adapter = MethodAdapter(method)
-                    layoutManager = LinearLayoutManager(context)
-                }
+            binding.rvMethod.apply {
+                adapter = methodAdapter
+                layoutManager = LinearLayoutManager(context)
+
             }
         }
     }
@@ -88,5 +90,21 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         }
         dividerItemDecoration?.setLastItemDecorated(false)
         return dividerItemDecoration!!
+    }
+
+    class IngredientsCountChooseSeekbar(
+        private val onChangeIngredients: (Int) -> Unit
+    ) : SeekBar.OnSeekBarChangeListener {
+        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+            onChangeIngredients.invoke(progress)
+        }
+
+        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            // Обработать начало взаимодействия с ползунком
+        }
+
+        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            // Обработать окончание взаимодействия с ползунком
+        }
     }
 }

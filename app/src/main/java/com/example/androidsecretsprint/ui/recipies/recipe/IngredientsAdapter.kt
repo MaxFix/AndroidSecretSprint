@@ -12,7 +12,7 @@ import com.example.androidsecretsprint.R
 import com.example.androidsecretsprint.model.Ingredient
 
 class IngredientsAdapter(
-    private val dataSet: List<Ingredient>,
+    var dataSet: List<Ingredient>,
 ) :
     RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
     private var quantity = 1
@@ -44,7 +44,7 @@ class IngredientsAdapter(
         }
 
         try {
-                viewHolder.ingredientName.text = ingredientName.text
+            viewHolder.ingredientName.text = ingredientName.text
             viewHolder.ingredientCount.text = displayQuantity
             viewHolder.ingredientMeasure.text = ingredientMeasure.text
             viewHolder.ingredientName.setTextColor(

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.R
 
 class MethodAdapter(
-    private val dataSet: List<String>,
+    var dataSet: List<String>,
 ) :
     RecyclerView.Adapter<MethodAdapter.ViewHolder>() {
 

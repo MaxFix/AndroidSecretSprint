@@ -11,7 +11,7 @@ data class CategoriesListUiState(
     val dataSet: List<Category> = emptyList(),
 )
 
-class CategoriesListViewModel(private val application: Application) : AndroidViewModel(application) {
+class CategoriesListViewModel(application: Application) : AndroidViewModel(application) {
     private val _categoriesListState = MutableLiveData<CategoriesListUiState>()
     val categoriesListState: LiveData<CategoriesListUiState> = _categoriesListState
 

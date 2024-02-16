@@ -28,7 +28,6 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //initRecycler()
         viewModel.loadCategories()
         viewModel.categoriesListState.observe(viewLifecycleOwner) { state: CategoriesListUiState ->
             val categories: List<Category> = state.dataSet

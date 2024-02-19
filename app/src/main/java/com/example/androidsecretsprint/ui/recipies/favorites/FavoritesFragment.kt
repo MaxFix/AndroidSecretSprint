@@ -45,7 +45,6 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private fun initUI() {
         viewModel.favoritesState.observe(viewLifecycleOwner) { state: FavoritesUiState ->
             val favoriteRecipes = state.dataSet
-
             if (favoriteRecipes.isEmpty()) {
                 binding.tvNoData.visibility = View.VISIBLE
                 binding.rvFavoriteRecipes.visibility = View.GONE

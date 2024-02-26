@@ -2,7 +2,7 @@ package com.example.androidsecretsprint.ui.recipies.recipe
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.androidsecretsprint.ui.recipies.favorites.PreferencesRepository
+import com.example.androidsecretsprint.data.PreferencesRepository
 
 class RecipeViewModelFactory(private val repository: PreferencesRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

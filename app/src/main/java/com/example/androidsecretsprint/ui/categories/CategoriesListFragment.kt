@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -18,12 +19,16 @@ import com.example.androidsecretsprint.ui.recipies.recipiesList.RecipesListFragm
 
 
 class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
-    private lateinit var binding: FragmentListCategoriesBinding
+    private var binding: FragmentListCategoriesBinding? = null
     private val viewModel: CategoriesListViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): LinearLayout? {
         binding = FragmentListCategoriesBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,8 +37,8 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
         viewModel.categoriesListState.observe(viewLifecycleOwner) { state: CategoriesListUiState ->
             val categories: List<Category> = state.dataSet
             val categoriesListAdapter = CategoriesListAdapter(categories, context = this)
-            val recyclerView = binding.rvCategories
-            recyclerView.adapter = categoriesListAdapter
+            val recyclerView = binding?.rvCategories
+            recyclerView?.adapter = categoriesListAdapter
             categoriesListAdapter.setOnItemClickListener(object : CategoriesListAdapter.OnItemClickListener {
                 override fun onItemClick(categoryId: Int) {
                     openRecipesByCategoryId(categoryId)

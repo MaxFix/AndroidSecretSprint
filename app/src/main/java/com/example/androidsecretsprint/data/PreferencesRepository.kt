@@ -1,9 +1,8 @@
-package com.example.androidsecretsprint.ui.recipies.favorites
+package com.example.androidsecretsprint.data
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.core.content.edit
-import com.example.androidsecretsprint.data.Constants
 import java.io.IOException
 
 class PreferencesRepository(context: Context) {

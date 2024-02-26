@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.androidsecretsprint.data.Constants
+import com.example.androidsecretsprint.data.PreferencesRepository
 import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.model.Recipe
-import com.example.androidsecretsprint.ui.recipies.favorites.PreferencesRepository
 
 data class RecipesListUiState(
     val dataSetRecipesList: List<Recipe> = emptyList(),

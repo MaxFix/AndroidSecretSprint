@@ -3,6 +3,7 @@ package com.example.androidsecretsprint.ui.recipies.favorites
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.androidsecretsprint.data.PreferencesRepository
 import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.model.Recipe
 

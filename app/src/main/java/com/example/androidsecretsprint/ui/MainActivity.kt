@@ -3,34 +3,23 @@ package com.example.androidsecretsprint.ui
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
+import androidx.navigation.findNavController
 import com.example.androidsecretsprint.R
-import com.example.androidsecretsprint.databinding.ActivityMainBinding
-import com.example.androidsecretsprint.ui.categories.CategoriesListFragment
-import com.example.androidsecretsprint.ui.recipies.favorites.FavoritesFragment
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
-        val categoriesBtn: Button = binding.btnCategories
-        val favoritesBtn: Button = binding.btnFavorites
+        val categoriesBtn: Button = findViewById(R.id.btnCategories)
+        val favoritesBtn: Button = findViewById(R.id.btnFavorites)
 
         categoriesBtn.setOnClickListener {
-            supportFragmentManager.commit {
-                replace(R.id.mainContainer, CategoriesListFragment())
-            }
+            findNavController(R.id.mainContainer).navigate(R.id.btnCategories)
         }
 
         favoritesBtn.setOnClickListener {
-            supportFragmentManager.commit {
-                replace(R.id.mainContainer, FavoritesFragment())
-            }
+            findNavController(R.id.mainContainer).navigate(R.id.btnFavorites)
         }
     }
 }

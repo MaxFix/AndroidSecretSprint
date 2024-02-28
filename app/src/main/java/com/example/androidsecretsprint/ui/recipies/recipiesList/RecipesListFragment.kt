@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.androidsecretsprint.R
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
@@ -23,7 +25,19 @@ import java.io.InputStream
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     private var binding: FragmentRecipesListBinding? = null
     private val viewModel: RecipesListViewModel by viewModels {
-        RecipesListViewModelFactory(PreferencesRepository(requireContext()))
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return when (modelClass) {
+                    RecipesListViewModel::class.java -> {
+                        RecipesListViewModel(PreferencesRepository(requireContext())) as T
+                    }
+
+                    else -> {
+                        throw IllegalArgumentException("Unknown ViewModel class")
+                    }
+                }
+            }
+        }
     }
 
     private var recipeTitle: String? = null

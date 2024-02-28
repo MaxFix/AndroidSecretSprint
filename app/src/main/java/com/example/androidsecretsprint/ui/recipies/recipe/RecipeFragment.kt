@@ -9,11 +9,11 @@ import android.widget.SeekBar
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsecretsprint.R
-import com.example.androidsecretsprint.data.CommonViewModelFactory
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
 import com.example.androidsecretsprint.data.PreferencesRepository
 import com.example.androidsecretsprint.databinding.FragmentRecipeBinding
@@ -24,11 +24,20 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private var seekBar: SeekBar? = null
     private var ingredientsAdapter: IngredientsAdapter? = null
     private var methodAdapter: MethodAdapter? = null
-    private val viewModelFactory = CommonViewModelFactory(mapOf(RecipeViewModel::class.java to {
-        RecipeViewModel(PreferencesRepository(requireContext()))
-    }), requireContext())
     private val viewModel: RecipeViewModel by viewModels {
-        viewModelFactory { viewModelFactory }
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return when (modelClass) {
+                    RecipeViewModel::class.java -> {
+                        RecipeViewModel(PreferencesRepository(requireContext())) as T
+                    }
+
+                    else -> {
+                        throw IllegalArgumentException("Unknown ViewModel class")
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreateView(

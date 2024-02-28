@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidsecretsprint.R
-import com.example.androidsecretsprint.data.CommonViewModelFactory
 import com.example.androidsecretsprint.data.Constants
 import com.example.androidsecretsprint.data.PreferencesRepository
 import com.example.androidsecretsprint.data.STUB
@@ -23,11 +23,21 @@ import com.example.androidsecretsprint.ui.recipies.recipiesList.RecipesListAdapt
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private var binding: FragmentFavoritesBinding? = null
-    private val viewModelFactory = CommonViewModelFactory(mapOf(FavoritesViewModel::class.java to {
-        FavoritesViewModel(PreferencesRepository(requireContext()))
-    }), requireContext())
+
     private val viewModel: FavoritesViewModel by viewModels {
-        viewModelFactory { viewModelFactory }
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return when (modelClass) {
+                    FavoritesViewModel::class.java -> {
+                        FavoritesViewModel(PreferencesRepository(requireContext())) as T
+                    }
+
+                    else -> {
+                        throw IllegalArgumentException("Unknown ViewModel class")
+                    }
+                }
+            }
+        }
     }
 
     private var recipeID: String? = null
@@ -35,9 +45,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private var recipeImageUrl: String? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): LinearLayoutCompat? {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding?.root

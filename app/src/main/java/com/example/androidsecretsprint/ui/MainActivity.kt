@@ -11,15 +11,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         val categoriesBtn: Button = findViewById(R.id.btnCategories)
         val favoritesBtn: Button = findViewById(R.id.btnFavorites)
 
         categoriesBtn.setOnClickListener {
-            findNavController(R.id.mainContainer).navigate(R.id.btnCategories)
+            findNavController(R.id.mainContainer).navigate(R.id.global_action_to_categoriesListFragment)
         }
 
         favoritesBtn.setOnClickListener {
-            findNavController(R.id.mainContainer).navigate(R.id.btnFavorites)
+            findNavController(R.id.mainContainer).navigate(R.id.global_action_to_favoritesFragment)
         }
     }
 }

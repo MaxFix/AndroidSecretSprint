@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.androidsecretsprint.R
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
 import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.databinding.FragmentRecipesListBinding
 import com.example.androidsecretsprint.ui.recipies.favorites.PreferencesRepository
-import com.example.androidsecretsprint.ui.recipies.recipe.RecipeFragment
 import java.io.InputStream
 
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
@@ -67,10 +65,6 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
 
         bundle.putParcelable(ARG_RECIPE, recipe)
 
-        parentFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<RecipeFragment>(R.id.mainContainer, args = bundle)
-            addToBackStack(null)
-        }
+        findNavController().navigate(R.id.action_recipesListFragment_to_recipeFragment, bundle)
     }
 }

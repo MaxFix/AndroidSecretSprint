@@ -1,73 +1,90 @@
 package com.example.androidsecretsprint.ui.recipies.favorites
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidsecretsprint.R
 import com.example.androidsecretsprint.data.Constants
+import com.example.androidsecretsprint.data.PreferencesRepository
 import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.databinding.FragmentFavoritesBinding
 import com.example.androidsecretsprint.ui.recipies.recipe.RecipeFragment
 import com.example.androidsecretsprint.ui.recipies.recipiesList.RecipesListAdapter
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
-    private lateinit var binding: FragmentFavoritesBinding
+    private var binding: FragmentFavoritesBinding? = null
+
+    private val viewModel: FavoritesViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return when (modelClass) {
+                    FavoritesViewModel::class.java -> {
+                        FavoritesViewModel(PreferencesRepository(requireContext())) as T
+                    }
+
+                    else -> {
+                        throw IllegalArgumentException("Unknown ViewModel class")
+                    }
+                }
+            }
+        }
+    }
 
     private var recipeID: String? = null
     private var recipeTitle: String? = null
     private var recipeImageUrl: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): LinearLayoutCompat? {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.loadFavorites()
 
-        initUI()
-        initArgs()
-    }
-
-    private fun initArgs() {
         arguments.let {
             recipeID = Constants.ARG_CATEGORY_ID
-            recipeTitle = Constants.ARG_CATEGORY_NAME
-            recipeImageUrl = Constants.ARG_CATEGORY_IMAGE_URL
         }
+        initUI()
     }
 
     private fun initUI() {
-        val favoriteRecipeIdsStringSet = getFavorites()
-        if (favoriteRecipeIdsStringSet.isEmpty()) {
-            binding.tvNoData.visibility = View.VISIBLE
-            binding.rvFavoriteRecipes.visibility = View.GONE
-        } else {
-            binding.tvNoData.visibility = View.GONE
-            binding.rvFavoriteRecipes.visibility = View.VISIBLE
-        }
+        viewModel.favoritesState.observe(viewLifecycleOwner) { state: FavoritesUiState ->
+            val favoriteRecipes = state.dataSet
 
-        val favoriteRecipeIds = favoriteRecipeIdsStringSet.mapNotNull { idString ->
-            idString.toIntOrNull()
-        }.toSet()
-        val favoriteRecipes = STUB.getRecipesByIds(favoriteRecipeIds)
-        val favoritesListAdapter = RecipesListAdapter(favoriteRecipes, this).apply {
-            setOnItemClickListener(object : RecipesListAdapter.OnItemClickListener {
-                override fun onItemClick(recipeId: Int) {
-                    openRecipeByRecipeId(recipeId)
-                }
-            })
-        }
-        binding.rvFavoriteRecipes.apply {
-            adapter = favoritesListAdapter
-            layoutManager = LinearLayoutManager(context)
+            if (favoriteRecipes.isEmpty()) {
+                binding?.tvNoData?.visibility = View.VISIBLE
+                binding?.rvFavoriteRecipes?.visibility = View.GONE
+            } else {
+                binding?.tvNoData?.visibility = View.GONE
+                binding?.rvFavoriteRecipes?.visibility = View.VISIBLE
+            }
+
+            val favoritesListAdapter = RecipesListAdapter(favoriteRecipes, this).apply {
+                setOnItemClickListener(object : RecipesListAdapter.OnItemClickListener {
+                    override fun onItemClick(recipeId: Int) {
+                        openRecipeByRecipeId(recipeId)
+                    }
+                })
+            }
+
+            binding?.rvFavoriteRecipes?.apply {
+                adapter = favoritesListAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
         }
     }
 
@@ -86,10 +103,5 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
             replace<RecipeFragment>(R.id.mainContainer, args = bundle)
             addToBackStack(null)
         }
-    }
-
-    private fun getFavorites(): Set<String> {
-        val sharedPrefs = activity?.getSharedPreferences(Constants.SHARED_PREFS_RECIPES, Context.MODE_PRIVATE)
-        return sharedPrefs?.getStringSet(Constants.SHARED_PREFS_RECIPES_DATA, setOf()) ?: setOf()
     }
 }

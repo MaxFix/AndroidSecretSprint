@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.androidsecretsprint.R
-import com.example.androidsecretsprint.data.Constants.Companion.ARG_CATEGORY_ID
-import com.example.androidsecretsprint.data.Constants.Companion.ARG_CATEGORY_IMAGE_URL
-import com.example.androidsecretsprint.data.Constants.Companion.ARG_CATEGORY_NAME
+import com.example.androidsecretsprint.data.Constants
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
 import com.example.androidsecretsprint.data.STUB
@@ -21,53 +23,62 @@ import com.example.androidsecretsprint.ui.recipies.recipe.RecipeFragment
 import java.io.InputStream
 
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
-    private lateinit var binding: FragmentRecipesListBinding
+    private var binding: FragmentRecipesListBinding? = null
+    private val viewModel: RecipesListViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return when (modelClass) {
+                    RecipesListViewModel::class.java -> {
+                        RecipesListViewModel() as T
+                    }
 
-    private var recipeID: String? = null
+                    else -> {
+                        throw IllegalArgumentException("Unknown ViewModel class")
+                    }
+                }
+            }
+        }
+    }
+
     private var recipeTitle: String? = null
     private var recipeImageUrl: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): LinearLayoutCompat? {
         binding = FragmentRecipesListBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
-        initArgs()
-        initUI()
+        val bundle = requireArguments()
+        viewModel.recipesListState.value?.categoryId = arguments?.getInt(Constants.ARG_CATEGORY_ID)
+        viewModel.recipesListState.value?.categoryName = arguments?.getString(Constants.ARG_CATEGORY_NAME)
+        viewModel.recipesListState.value?.categoryImageUrl = arguments?.getString(Constants.ARG_CATEGORY_IMAGE_URL)
+        viewModel.loadRecipes(bundle.getInt(Constants.ARG_CATEGORY_ID))
+        viewModel.recipesListState.observe(viewLifecycleOwner) { state: RecipesListUiState ->
+            val recipesList = state.dataSetRecipesList
+            recipeTitle = state.categoryName
+            recipeImageUrl = state.categoryImageUrl
 
-        val inputStream: InputStream? = recipeImageUrl?.let { this.context?.assets?.open(it) }
-        val drawable = Drawable.createFromStream(inputStream, null)
-        binding.recipesListHeaderImg.setImageDrawable(drawable)
-        binding.recipesListHeaderText.text = recipeTitle
-    }
+            val inputStream: InputStream? = recipeImageUrl?.let { this.context?.assets?.open(it) }
+            val drawable = Drawable.createFromStream(inputStream, null)
+            binding?.recipesListHeaderImg?.setImageDrawable(drawable)
+            binding?.recipesListHeaderText?.text = recipeTitle
 
-    private fun initArgs() {
-        recipeID = arguments?.getString(ARG_CATEGORY_ID)
-        recipeTitle = arguments?.getString(ARG_CATEGORY_NAME)
-        recipeImageUrl = arguments?.getString(ARG_CATEGORY_IMAGE_URL)
-    }
-
-    private fun initUI() {
-        val inputStream: InputStream? = recipeImageUrl?.let { this.context?.assets?.open(it) }
-        val drawable = Drawable.createFromStream(inputStream, null)
-        binding.recipesListHeaderImg.setImageDrawable(drawable)
-        binding.recipesListHeaderText.text = recipeTitle
-    }
-
-    private fun initRecycler() {
-        val recipesListAdapter = arguments?.getInt(ARG_CATEGORY_ID)
-            ?.let { STUB.getRecipesByCategoryId(it) }?.let { RecipesListAdapter(it, this) }
-        val recyclerView = binding.rvRecipes
-        recyclerView.adapter = recipesListAdapter
-        recipesListAdapter?.setOnItemClickListener(object : RecipesListAdapter.OnItemClickListener {
-            override fun onItemClick(recipeId: Int) {
-                openRecipeByRecipeId(recipeId)
+            val recipesListAdapter = RecipesListAdapter(recipesList, this)
+            val recyclerView = binding?.rvRecipes
+            recyclerView?.adapter = recipesListAdapter
+            recipesListAdapter.setOnItemClickListener(object : RecipesListAdapter.OnItemClickListener {
+                override fun onItemClick(recipeId: Int) {
+                    openRecipeByRecipeId(recipeId)
+                }
             }
+            )
         }
-        )
     }
 
     fun openRecipeByRecipeId(recipeId: Int) {

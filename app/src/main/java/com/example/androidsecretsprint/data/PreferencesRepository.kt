@@ -13,10 +13,6 @@ class PreferencesRepository(context: Context) {
         return sharedPreferences.getStringSet(Constants.SHARED_PREFS_RECIPES_DATA, setOf()) ?: setOf()
     }
 
-    fun getRecipesList(): Int {
-        return sharedPreferences.getInt(Constants.ARG_CATEGORY_ID, 0)
-    }
-
     fun saveFavorites(recipesIds: Set<String>) {
         sharedPreferences.edit() {
             putStringSet(Constants.SHARED_PREFS_RECIPES_DATA, recipesIds)

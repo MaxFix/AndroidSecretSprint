@@ -14,9 +14,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.androidsecretsprint.R
+import com.example.androidsecretsprint.data.Constants
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE
 import com.example.androidsecretsprint.data.Constants.Companion.ARG_RECIPE_ID
-import com.example.androidsecretsprint.data.PreferencesRepository
 import com.example.androidsecretsprint.data.STUB
 import com.example.androidsecretsprint.databinding.FragmentRecipesListBinding
 import com.example.androidsecretsprint.ui.recipies.recipe.RecipeFragment
@@ -29,7 +29,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return when (modelClass) {
                     RecipesListViewModel::class.java -> {
-                        RecipesListViewModel(PreferencesRepository(requireContext())) as T
+                        RecipesListViewModel() as T
                     }
 
                     else -> {
@@ -55,7 +55,10 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bundle = requireArguments()
-        viewModel.loadRecipes(bundle)
+        viewModel.recipesListState.value?.categoryId = arguments?.getInt(Constants.ARG_CATEGORY_ID)
+        viewModel.recipesListState.value?.categoryName = arguments?.getString(Constants.ARG_CATEGORY_NAME)
+        viewModel.recipesListState.value?.categoryImageUrl = arguments?.getString(Constants.ARG_CATEGORY_IMAGE_URL)
+        viewModel.loadRecipes(bundle.getInt(Constants.ARG_CATEGORY_ID))
         viewModel.recipesListState.observe(viewLifecycleOwner) { state: RecipesListUiState ->
             val recipesList = state.dataSetRecipesList
             recipeTitle = state.categoryName
